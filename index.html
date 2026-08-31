@@ -1,0 +1,2727 @@
+
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<style>
+
+
+/* =========================
+   기본 설정
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+
+    background: #eaf7ff;
+
+    font-family:
+        Arial,
+        "Apple SD Gothic Neo",
+        sans-serif;
+
+    color: #17345c;
+}
+
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================
+   모바일 게임 화면
+========================= */
+
+.game-app {
+
+    width: min(100%, 430px);
+
+    min-height: 100dvh;
+
+    margin: 0 auto;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #bfe9ff 0%,
+            #dff4ff 58%,
+            #f8fdff 100%
+        );
+
+    border-left: 3px solid #4a9ce8;
+    border-right: 3px solid #4a9ce8;
+}
+
+
+/* =========================
+   구름
+========================= */
+
+.cloud {
+
+    position: absolute;
+
+    background: white;
+
+    border-radius: 20px;
+
+    opacity: 0.9;
+}
+
+
+.cloud::before,
+.cloud::after {
+
+    content: "";
+
+    position: absolute;
+
+    background: white;
+
+    border-radius: 50%;
+}
+
+
+.cloud1 {
+
+    width: 70px;
+    height: 20px;
+
+    top: 55px;
+    left: 18px;
+}
+
+
+.cloud1::before {
+
+    width: 28px;
+    height: 28px;
+
+    top: -14px;
+    left: 14px;
+}
+
+
+.cloud1::after {
+
+    width: 34px;
+    height: 34px;
+
+    top: -19px;
+    right: 10px;
+}
+
+
+.cloud2 {
+
+    width: 75px;
+    height: 20px;
+
+    top: 110px;
+    right: 18px;
+}
+
+
+.cloud2::before {
+
+    width: 30px;
+    height: 30px;
+
+    top: -15px;
+    left: 8px;
+}
+
+
+.cloud2::after {
+
+    width: 35px;
+    height: 35px;
+
+    top: -20px;
+    right: 8px;
+}
+
+
+/* =========================
+   화면
+========================= */
+
+.screen {
+
+    display: none;
+
+    position: relative;
+
+    z-index: 5;
+
+    height: 100dvh;
+    min-height: 100dvh;
+
+    padding: 22px 20px 28px;
+}
+
+
+.screen.active {
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* =========================
+   공통 픽셀 UI
+========================= */
+
+.pixel-panel {
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border:
+        3px solid #438fe0;
+
+    box-shadow:
+        4px 4px 0 #9ccdf4,
+        inset 0 0 0 2px #e4f4ff;
+}
+
+
+.pixel-btn {
+
+    border:
+        3px solid #245f9f;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 5px 0 #174574,
+        inset 0 0 0 2px rgba(255,255,255,0.4);
+
+    background:
+        linear-gradient(
+            #69b9ff,
+            #328ae1
+        );
+
+    color: white;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+.pixel-btn:active {
+
+    transform:
+        translateY(4px);
+
+    box-shadow:
+        0 1px 0 #174574;
+}
+
+
+/* =========================
+   시작 화면
+========================= */
+
+#startScreen {
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.help-btn {
+
+    position: absolute;
+
+    top: 18px;
+    right: 17px;
+
+    width: 48px;
+    height: 48px;
+
+    border:
+        3px solid #276bb4;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #2f78c7;
+
+    font-size: 27px;
+
+    font-weight: 900;
+
+    box-shadow:
+        3px 3px 0 #91c5ef;
+
+    cursor: pointer;
+}
+
+
+.main-title {
+
+    font-size:
+        clamp(44px, 13vw, 64px);
+
+    line-height: 0.9;
+
+    font-weight: 1000;
+
+    letter-spacing: -3px;
+
+    color: white;
+
+    text-shadow:
+        3px 0 #184b84,
+        -3px 0 #184b84,
+        0 3px #184b84,
+        0 -3px #184b84,
+        5px 5px 0 #72afe3;
+
+    margin-bottom: 40px;
+}
+
+
+.main-title span {
+    display: block;
+}
+
+
+.start-message {
+
+    width: 90%;
+
+    padding: 20px 14px;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    line-height: 1.7;
+
+    margin-bottom: 32px;
+}
+
+
+.play-btn {
+
+    width: 190px;
+
+    padding: 17px;
+
+    font-size: 24px;
+}
+
+
+.best-box {
+
+    margin-top: 24px;
+
+    padding: 12px 18px;
+
+    background: white;
+
+    border:
+        2px solid #9dcdf2;
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+/* =========================
+   상단 헤더
+========================= */
+
+.top-bar {
+
+    display: flex;
+
+    align-items: center;
+
+    min-height: 58px;
+
+    margin:
+        -22px -20px 22px;
+
+    padding:
+        10px 16px;
+
+    background:
+        rgba(255,255,255,0.9);
+
+    border-bottom:
+        3px solid #8bc3ee;
+}
+
+
+.back-btn {
+
+    width: 42px;
+    height: 42px;
+
+    margin-right: 14px;
+
+    background: white;
+
+    border:
+        3px solid #3f87d0;
+
+    border-radius: 6px;
+
+    color: #367bc2;
+
+    font-size: 21px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+
+.top-title {
+
+    flex: 1;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    margin-right: 56px;
+}
+
+
+/* =========================
+   설명 화면
+========================= */
+
+.rules-panel {
+
+    padding: 22px 18px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+.rule {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+
+.rule:last-child {
+    margin-bottom: 0;
+}
+
+
+.rule-icon {
+
+    min-width: 38px;
+
+    font-size: 28px;
+
+    text-align: center;
+}
+
+
+.rule strong {
+
+    display: block;
+
+    font-size: 15px;
+
+    margin-bottom: 4px;
+}
+
+
+/* =========================
+   종목 선택
+========================= */
+
+#stockScreen {
+
+    overflow: hidden;
+}
+
+
+.select-info {
+
+    text-align: center;
+
+    margin-bottom: 22px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+.stock-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+.stock-option {
+
+    padding: 17px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    min-height: 78px;
+}
+
+
+.start-game-btn {
+
+    margin-top: auto;
+
+    padding: 16px;
+
+    font-size: 20px;
+}
+
+
+.stock-option.selected {
+
+    background: #edf8ff;
+}
+
+
+.stock-icon {
+
+    font-size:
+        clamp(25px, 4dvh, 33px);
+
+    margin-right: 14px;
+}
+
+
+.stock-name {
+
+    font-size:
+        clamp(16px, 2.4dvh, 19px);
+
+    font-weight: 900;
+}
+
+
+.stock-code {
+
+    margin-top: 4px;
+
+    color: #4f83b8;
+
+    font-size:
+        clamp(11px, 1.8dvh, 13px);
+
+    font-weight: 700;
+}
+
+
+.check-box {
+
+    margin-left: auto;
+
+    width:
+        clamp(25px, 3.8dvh, 31px);
+
+    height:
+        clamp(25px, 3.8dvh, 31px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #4c9cec;
+
+    color: white;
+
+    border:
+        2px solid #2667a9;
+
+    font-weight: 900;
+
+    visibility: hidden;
+}
+
+
+.stock-option.selected .check-box {
+
+    visibility: visible;
+}
+
+
+/* =========================
+   게임
+========================= */
+
+.game-status {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 12px 15px;
+
+    margin-bottom: 24px;
+
+    background:
+        rgba(255,255,255,0.9);
+
+    border:
+        2px solid #82bcea;
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+.game-company {
+
+    text-align: center;
+
+    font-size: 31px;
+
+    font-weight: 1000;
+
+    color: #347cc5;
+}
+
+
+.game-date {
+
+    margin-top: 6px;
+
+    text-align: center;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: #35536d;
+}
+
+
+.price-panel {
+
+    width: 85%;
+
+    margin:
+        30px auto 35px;
+
+    padding:
+        19px 10px;
+
+    text-align: center;
+}
+
+
+.price-label {
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.current-price {
+
+    margin-top: 7px;
+
+    font-size:
+        clamp(30px, 9vw, 39px);
+
+    font-weight: 1000;
+
+    color: #142e50;
+}
+
+
+.question-box {
+
+    margin-top: auto;
+
+    padding: 20px 15px;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border-top:
+        3px solid #8ac2ec;
+}
+
+
+.question {
+
+    margin-bottom: 17px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-weight: 900;
+}
+
+
+.answer-wrap {
+
+    display: flex;
+
+    gap: 14px;
+}
+
+
+.answer-btn {
+
+    flex: 1;
+
+    min-height: 100px;
+
+    border-radius: 6px;
+
+    font-size: 21px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+
+.up-btn {
+
+    background: #fff0f0;
+
+    border:
+        3px solid #e05d5d;
+
+    color: #d94b4b;
+
+    box-shadow:
+        0 5px 0 #b63d3d;
+}
+
+
+.down-btn {
+
+    background: #edf6ff;
+
+    border:
+        3px solid #438cdb;
+
+    color: #347dcc;
+
+    box-shadow:
+        0 5px 0 #2867ab;
+}
+
+
+.answer-btn:disabled {
+
+    opacity: 0.45;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================
+   팝업
+========================= */
+
+.overlay {
+
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 50;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 24px;
+
+    background:
+        rgba(35,60,85,0.64);
+}
+
+
+.overlay.active {
+
+    display: flex;
+}
+
+
+.popup {
+
+    width: 100%;
+
+    padding: 26px 20px;
+
+    background: white;
+
+    border:
+        3px solid #559be0;
+
+    box-shadow:
+        5px 5px 0 #92c5ed;
+
+    text-align: center;
+
+    animation:
+        pop 0.22s ease;
+}
+
+
+@keyframes pop {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.85);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+
+.popup-icon {
+
+    font-size: 43px;
+}
+
+
+.popup-title {
+
+    margin:
+        8px 0 14px;
+
+    font-size: 23px;
+
+    font-weight: 1000;
+
+    color: #2575bf;
+}
+
+
+.popup-message {
+
+    margin: 10px 0 4px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    line-height: 1.6;
+
+    color: #35536d;
+}
+
+
+.report-item {
+
+    margin: 9px 0;
+
+    padding: 16px 12px;
+
+    background: #f4faff;
+
+    border:
+        2px solid #c3e1f7;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    line-height: 1.5;
+}
+
+
+.confirm-btn {
+
+    width: 100%;
+
+    margin-top: 17px;
+
+    padding: 14px;
+
+    font-size: 17px;
+}
+
+
+/* =========================
+   결과
+========================= */
+
+.result-icon {
+
+    font-size: 56px;
+}
+
+
+.correct-title {
+
+    color: #d95353;
+}
+
+
+.wrong-title {
+
+    color: #377fc7;
+}
+
+
+.result-price {
+
+    margin-top: 20px;
+
+    font-size: 34px;
+
+    font-weight: 1000;
+
+    color: #17345c;
+}
+
+
+.result-rate {
+
+    margin-top: 10px;
+
+    font-size: 29px;
+
+    font-weight: 1000;
+}
+
+
+.rate-up {
+
+    color: #e14d4d;
+}
+
+
+.rate-down {
+
+    color: #347dcc;
+}
+
+
+.rate-same {
+
+    color: #777;
+}
+
+
+/* =========================
+   게임오버
+========================= */
+
+#gameOverScreen {
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.game-over-title {
+
+    font-size: 47px;
+
+    line-height: 1;
+
+    font-weight: 1000;
+
+    color: white;
+
+    text-shadow:
+        3px 0 #2d65a5,
+        -3px 0 #2d65a5,
+        0 3px #2d65a5,
+        0 -3px #2d65a5,
+        5px 5px #a0cdf1;
+}
+
+
+.score-card {
+
+    width: 85%;
+
+    margin:
+        35px 0;
+
+    padding:
+        25px 12px;
+}
+
+
+.score-label {
+
+    font-weight: 800;
+}
+
+
+.score-number {
+
+    margin:
+        5px 0 15px;
+
+    font-size: 55px;
+
+    font-weight: 1000;
+
+    color: #367fca;
+}
+
+
+.save-gameover-btn {
+
+    width: 85%;
+
+    margin-bottom: 16px;
+
+    padding: 14px;
+
+    font-size: 17px;
+}
+
+
+.gameover-btns {
+
+    width: 85%;
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.gameover-btns button {
+
+    flex: 1;
+
+    padding:
+        14px 5px;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   CLEAR
+========================= */
+
+#clearScreen {
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.clear-title {
+
+    font-size: 48px;
+
+    font-weight: 1000;
+
+    color: white;
+
+    text-shadow:
+        3px 0 #2d65a5,
+        -3px 0 #2d65a5,
+        0 3px #2d65a5,
+        0 -3px #2d65a5,
+        5px 5px #a0cdf1;
+}
+
+
+/* =========================
+   세로가 짧은 휴대폰
+========================= */
+
+@media
+(max-height: 700px) {
+
+    #stockScreen {
+
+        padding-top: 14px;
+        padding-bottom: 16px;
+    }
+
+
+    #stockScreen .top-bar {
+
+        min-height: 48px;
+
+        margin-top: -14px;
+        margin-bottom: 10px;
+
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+
+
+    #stockScreen .back-btn {
+
+        width: 36px;
+        height: 36px;
+
+        font-size: 18px;
+    }
+
+
+    #stockScreen .top-title {
+
+        font-size: 19px;
+    }
+
+
+    #stockScreen .select-info {
+
+        margin-bottom: 7px;
+
+        font-size: 13px;
+    }
+
+
+    #stockScreen .stock-list {
+
+        gap: 5px;
+    }
+
+
+    #stockScreen .stock-option {
+
+        padding: 7px 11px;
+    }
+
+
+    #stockScreen .stock-icon {
+
+        font-size: 23px;
+    }
+
+
+    #stockScreen .stock-name {
+
+        font-size: 15px;
+    }
+
+
+    #stockScreen .stock-code {
+
+        margin-top: 1px;
+
+        font-size: 11px;
+    }
+
+
+    #stockScreen .check-box {
+
+        width: 24px;
+        height: 24px;
+
+        font-size: 13px;
+    }
+
+
+    #stockScreen .start-game-btn {
+
+        padding: 9px;
+
+        font-size: 16px;
+    }
+}
+
+
+/* =========================
+   작은 모바일 폭 대응
+========================= */
+
+@media
+(max-width: 360px) {
+
+    .screen {
+
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+
+    .main-title {
+
+        font-size: 43px;
+    }
+
+
+    .current-price {
+
+        font-size: 30px;
+    }
+
+
+    .answer-btn {
+
+        font-size: 18px;
+    }
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="game-app">
+
+
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+
+
+<!-- =====================
+     시작 화면
+===================== -->
+
+<section
+    id="startScreen"
+    class="screen active"
+>
+
+    <button
+        class="help-btn"
+        onclick="openRules()"
+    >
+        ?
+    </button>
+
+
+    <div class="main-title">
+
+        <span>STOCK</span>
+        <span>GAME</span>
+
+    </div>
+
+
+    <div
+        class="start-message pixel-panel"
+    >
+
+        증권사 리포트를 참고하고<br>
+        다음 거래일의 방향을 예측하세요!
+
+    </div>
+
+
+    <button
+        class="play-btn pixel-btn"
+        onclick="openStockSelect()"
+    >
+
+        PLAY ▶
+
+    </button>
+
+
+    <div class="best-box">
+
+        🏆 BEST RECORD
+
+        <span id="startBest">
+            0
+        </span>일
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================
+     게임 규칙
+===================== -->
+
+<section
+    id="rulesScreen"
+    class="screen"
+>
+
+    <div class="top-bar">
+
+        <button
+            class="back-btn"
+            onclick="showScreen('startScreen')"
+        >
+            ←
+        </button>
+
+        <div class="top-title">
+            게임 규칙
+        </div>
+
+    </div>
+
+
+    <div
+        class="rules-panel pixel-panel"
+    >
+
+        <div class="rule">
+
+            <div class="rule-icon">
+                📅
+            </div>
+
+            <div>
+
+                <strong>
+                    하루씩 거래일이 진행됩니다
+                </strong>
+
+                현재 날짜와 종가를 확인하세요.
+
+            </div>
+
+        </div>
+
+
+        <div class="rule">
+
+            <div class="rule-icon">
+                📈
+            </div>
+
+            <div>
+
+                <strong>
+                    다음 거래일을 예측하세요
+                </strong>
+
+                다음 거래일의 종가가
+                상승할지 하락할지 선택합니다.
+
+            </div>
+
+        </div>
+
+
+        <div class="rule">
+
+            <div class="rule-icon">
+                📢
+            </div>
+
+            <div>
+
+                <strong>
+                    리포트가 있는 날!
+                </strong>
+
+                직전 거래일 이후부터
+                현재 거래일까지 등록된
+                증권사 리포트 중 최대 2개가
+                랜덤으로 나타납니다.
+
+            </div>
+
+        </div>
+
+
+        <div class="rule">
+
+            <div class="rule-icon">
+                🏆
+            </div>
+
+            <div>
+
+                <strong>
+                    최대한 오래 살아남으세요
+                </strong>
+
+                맞히면 연속 기록 +1.<br>
+                틀리면 게임이 종료됩니다.
+
+            </div>
+
+        </div>
+
+
+        <div class="rule">
+
+            <div class="rule-icon">
+                ⚖️
+            </div>
+
+            <div>
+
+                <strong>
+                    보합은 특별 규칙!
+                </strong>
+
+                다음 거래일 종가가 같다면
+                상승 또는 하락
+                어느 쪽을 선택해도 정답입니다.
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================
+     종목 선택
+===================== -->
+
+<section
+    id="stockScreen"
+    class="screen"
+>
+
+    <div class="top-bar">
+
+        <button
+            class="back-btn"
+            onclick="showScreen('startScreen')"
+        >
+            ←
+        </button>
+
+        <div class="top-title">
+            종목 선택
+        </div>
+
+    </div>
+
+
+    <div class="select-info">
+        예측할 종목을 선택하세요!
+    </div>
+
+
+    <div
+        id="stockList"
+        class="stock-list"
+    >
+    </div>
+
+
+    <button
+        class="start-game-btn pixel-btn"
+        onclick="startGame()"
+    >
+
+        게임 시작!
+
+    </button>
+
+
+</section>
+
+
+<!-- =====================
+     게임 화면
+===================== -->
+
+<section
+    id="gameScreen"
+    class="screen"
+>
+
+    <div class="game-status">
+
+        <div>
+
+            🔥 연속
+
+            <span id="streak">
+                0
+            </span>일
+
+        </div>
+
+
+        <div>
+
+            BEST
+
+            <span id="gameBest">
+                0
+            </span>일
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="gameCompany"
+        class="game-company"
+    >
+    </div>
+
+
+    <div
+        id="gameDate"
+        class="game-date"
+    >
+    </div>
+
+
+    <div
+        class="price-panel pixel-panel"
+    >
+
+        <div class="price-label">
+            현재 종가
+        </div>
+
+
+        <div
+            id="currentPrice"
+            class="current-price"
+        >
+        </div>
+
+    </div>
+
+
+    <div class="question-box">
+
+        <div class="question">
+            다음 거래일의 종가는?
+        </div>
+
+
+        <div class="answer-wrap">
+
+            <button
+                class="answer-btn up-btn"
+                onclick="answer('up')"
+            >
+
+                ▲<br>
+                상승
+
+            </button>
+
+
+            <button
+                class="answer-btn down-btn"
+                onclick="answer('down')"
+            >
+
+                ▼<br>
+                하락
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================
+     GAME OVER
+===================== -->
+
+<section
+    id="gameOverScreen"
+    class="screen"
+>
+
+    <div class="game-over-title">
+
+        GAME<br>
+        OVER
+
+    </div>
+
+
+    <div
+        class="score-card pixel-panel"
+    >
+
+        <div class="score-label">
+            연속 정답 기록
+        </div>
+
+
+        <div
+            id="finalScore"
+            class="score-number"
+        >
+            0일
+        </div>
+
+
+        <div>
+
+            🏆 BEST RECORD
+
+            <span id="finalBest">
+                0
+            </span>일
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="save-gameover-btn pixel-btn"
+        onclick="saveGameOverImage()"
+    >
+        📷 결과 이미지 저장
+    </button>
+
+
+    <div class="gameover-btns">
+
+        <button
+            class="pixel-btn"
+            onclick="restartSameStock()"
+        >
+
+            ↻ 다시 도전
+
+        </button>
+
+
+        <button
+            class="pixel-btn"
+            onclick="goStockSelect()"
+        >
+
+            🏠 종목 선택
+
+        </button>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================
+     GAME CLEAR
+===================== -->
+
+<section
+    id="clearScreen"
+    class="screen"
+>
+
+    <div class="clear-title">
+
+        GAME<br>
+        CLEAR!
+
+    </div>
+
+
+    <div
+        class="score-card pixel-panel"
+    >
+
+        <div class="score-label">
+            모든 문제를 맞혔습니다!
+        </div>
+
+
+        <div
+            id="clearScore"
+            class="score-number"
+        >
+        </div>
+
+
+        <div>
+            🏆 PERFECT!
+        </div>
+
+    </div>
+
+
+    <button
+        class="play-btn pixel-btn"
+        onclick="restartSameStock()"
+    >
+
+        다시 플레이
+
+    </button>
+
+
+</section>
+
+
+<!-- =====================
+     종목 미선택 팝업
+===================== -->
+
+<div
+    id="selectAlertOverlay"
+    class="overlay"
+>
+
+    <div class="popup">
+
+        <div class="popup-icon">
+            🪧
+        </div>
+
+
+        <div class="popup-title">
+            종목을 선택해주세요!
+        </div>
+
+
+        <div class="popup-message">
+
+            예측할 종목을 먼저 선택한 뒤<br>
+            게임을 시작해주세요.
+
+        </div>
+
+
+        <button
+            class="confirm-btn pixel-btn"
+            onclick="closeSelectAlert()"
+        >
+
+            확인
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================
+     리포트 팝업
+===================== -->
+
+<div
+    id="reportOverlay"
+    class="overlay"
+>
+
+    <div class="popup">
+
+        <div class="popup-icon">
+            📢
+        </div>
+
+
+        <div class="popup-title">
+            새로운 리포트!
+        </div>
+
+
+        <div id="reportList">
+        </div>
+
+
+        <button
+            class="confirm-btn pixel-btn"
+            onclick="closeReport()"
+        >
+
+            확인
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================
+     결과 팝업
+===================== -->
+
+<div
+    id="resultOverlay"
+    class="overlay"
+>
+
+    <div class="popup">
+
+        <div
+            id="resultIcon"
+            class="result-icon"
+        >
+        </div>
+
+
+        <div
+            id="resultTitle"
+            class="popup-title"
+        >
+        </div>
+
+
+        <div
+            id="resultPrice"
+            class="result-price"
+        >
+        </div>
+
+
+        <div
+            id="resultRate"
+            class="result-rate"
+        >
+        </div>
+
+
+        <button
+            id="resultButton"
+            class="confirm-btn pixel-btn"
+            onclick="afterResult()"
+        >
+        </button>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   Python에서 만든
+   5개 종목 게임 데이터
+========================= */
+
+const stockData =
+    {"005930": {"name": "삼성전자", "code": "005930", "data": [{"date": "2026.04.06", "price": 193100, "nextDate": "2026.04.07", "nextPrice": 196500, "reports": []}, {"date": "2026.04.07", "price": 196500, "nextDate": "2026.04.08", "nextPrice": 210500, "reports": ["놀라운 실적의 시작"]}, {"date": "2026.04.08", "price": 210500, "nextDate": "2026.04.09", "nextPrice": 204000, "reports": ["심각한 숏티지, 더 강력해지는 이익 체력", "진짜 놀랐습니다..", "한 분기 만에 2025년 전체를 넘다", "2026년 영업이익 355조원으로 상향", "Memory Giant", "주당가치 급증. 단 이란 전쟁은 여전히 중요", "너무 좋아도 걱정", "판도가 바뀌었다!"]}, {"date": "2026.04.09", "price": 204000, "nextDate": "2026.04.10", "nextPrice": 206000, "reports": []}, {"date": "2026.04.10", "price": 206000, "nextDate": "2026.04.13", "nextPrice": 201000, "reports": []}, {"date": "2026.04.13", "price": 201000, "nextDate": "2026.04.14", "nextPrice": 206500, "reports": []}, {"date": "2026.04.14", "price": 206500, "nextDate": "2026.04.15", "nextPrice": 211000, "reports": []}, {"date": "2026.04.15", "price": 211000, "nextDate": "2026.04.16", "nextPrice": 217500, "reports": []}, {"date": "2026.04.16", "price": 217500, "nextDate": "2026.04.17", "nextPrice": 216000, "reports": []}, {"date": "2026.04.17", "price": 216000, "nextDate": "2026.04.20", "nextPrice": 214500, "reports": []}, {"date": "2026.04.20", "price": 214500, "nextDate": "2026.04.21", "nextPrice": 219000, "reports": []}, {"date": "2026.04.21", "price": 219000, "nextDate": "2026.04.22", "nextPrice": 217500, "reports": ["실적 눈높이 재차 상향"]}, {"date": "2026.04.22", "price": 217500, "nextDate": "2026.04.23", "nextPrice": 224500, "reports": []}, {"date": "2026.04.23", "price": 224500, "nextDate": "2026.04.24", "nextPrice": 219500, "reports": []}, {"date": "2026.04.24", "price": 219500, "nextDate": "2026.04.27", "nextPrice": 224500, "reports": []}, {"date": "2026.04.27", "price": 224500, "nextDate": "2026.04.28", "nextPrice": 222000, "reports": []}, {"date": "2026.04.28", "price": 222000, "nextDate": "2026.04.29", "nextPrice": 226000, "reports": []}, {"date": "2026.04.29", "price": 226000, "nextDate": "2026.04.30", "nextPrice": 220500, "reports": []}, {"date": "2026.04.30", "price": 220500, "nextDate": "2026.05.04", "nextPrice": 232500, "reports": ["1Q26 Conference call"]}, {"date": "2026.05.04", "price": 232500, "nextDate": "2026.05.06", "nextPrice": 266000, "reports": ["1Q26 Review: 2027년은 더 심한 숏티지 구간", "1Q26 Re: 메모리와 파운드리 모두 순항 중", "갈 길이 멀다", "2Q26 예상 영업이익 86.8조원, 가격 모멘텀 ..", "수익성 약화 우려는 일시적", "단기 부담을 이겨 낼 구조적 변화", "바겐세일", "메모리 천하의 주인공", "의심할 여지 없는 초호황", "3Q26 영업이익 100조원 전망", "경쟁력 회복이 일조한 1Q26 Memory 실적"]}, {"date": "2026.05.06", "price": 266000, "nextDate": "2026.05.07", "nextPrice": 271500, "reports": ["호황의 강도와 지속성 모두 확인"]}, {"date": "2026.05.07", "price": 271500, "nextDate": "2026.05.08", "nextPrice": 268500, "reports": ["밸류에이션 할인 종식을 고함"]}, {"date": "2026.05.08", "price": 268500, "nextDate": "2026.05.11", "nextPrice": 285500, "reports": []}, {"date": "2026.05.11", "price": 285500, "nextDate": "2026.05.12", "nextPrice": 279000, "reports": ["중장기 사업 가시성 확보", "2Q26 영업이익 100조원 예상"]}, {"date": "2026.05.12", "price": 279000, "nextDate": "2026.05.13", "nextPrice": 284000, "reports": []}, {"date": "2026.05.13", "price": 284000, "nextDate": "2026.05.14", "nextPrice": 296000, "reports": []}, {"date": "2026.05.14", "price": 296000, "nextDate": "2026.05.15", "nextPrice": 270500, "reports": []}, {"date": "2026.05.15", "price": 270500, "nextDate": "2026.05.18", "nextPrice": 281000, "reports": []}, {"date": "2026.05.18", "price": 281000, "nextDate": "2026.05.19", "nextPrice": 275500, "reports": []}, {"date": "2026.05.19", "price": 275500, "nextDate": "2026.05.20", "nextPrice": 276000, "reports": []}, {"date": "2026.05.20", "price": 276000, "nextDate": "2026.05.21", "nextPrice": 299500, "reports": []}, {"date": "2026.05.21", "price": 299500, "nextDate": "2026.05.22", "nextPrice": 292500, "reports": ["초호황 속 조정 구간 = 매수 타이밍", "내부는 태풍, 외부는 폭풍"]}, {"date": "2026.05.22", "price": 292500, "nextDate": "2026.05.26", "nextPrice": 299000, "reports": []}, {"date": "2026.05.26", "price": 299000, "nextDate": "2026.05.27", "nextPrice": 307000, "reports": []}, {"date": "2026.05.27", "price": 307000, "nextDate": "2026.05.28", "nextPrice": 299500, "reports": ["밸류에이션 집중 추격 구간"]}, {"date": "2026.05.28", "price": 299500, "nextDate": "2026.05.29", "nextPrice": 317000, "reports": []}, {"date": "2026.05.29", "price": 317000, "nextDate": "2026.06.01", "nextPrice": 349000, "reports": []}, {"date": "2026.06.01", "price": 349000, "nextDate": "2026.06.02", "nextPrice": 360500, "reports": ["플러스 알파: 대규모 주주환원"]}, {"date": "2026.06.02", "price": 360500, "nextDate": "2026.06.04", "nextPrice": 351500, "reports": []}, {"date": "2026.06.04", "price": 351500, "nextDate": "2026.06.05", "nextPrice": 329000, "reports": []}, {"date": "2026.06.05", "price": 329000, "nextDate": "2026.06.08", "nextPrice": 295500, "reports": []}, {"date": "2026.06.08", "price": 295500, "nextDate": "2026.06.09", "nextPrice": 322000, "reports": []}, {"date": "2026.06.09", "price": 322000, "nextDate": "2026.06.10", "nextPrice": 302500, "reports": ["어두울땐 실적을 켜자"]}, {"date": "2026.06.10", "price": 302500, "nextDate": "2026.06.11", "nextPrice": 299000, "reports": []}, {"date": "2026.06.11", "price": 299000, "nextDate": "2026.06.12", "nextPrice": 322500, "reports": []}, {"date": "2026.06.12", "price": 322500, "nextDate": "2026.06.15", "nextPrice": 337000, "reports": []}, {"date": "2026.06.15", "price": 337000, "nextDate": "2026.06.16", "nextPrice": 343000, "reports": ["풀스텍 내재화의 우위"]}, {"date": "2026.06.16", "price": 343000, "nextDate": "2026.06.17", "nextPrice": 346500, "reports": []}, {"date": "2026.06.17", "price": 346500, "nextDate": "2026.06.18", "nextPrice": 362500, "reports": []}, {"date": "2026.06.18", "price": 362500, "nextDate": "2026.06.19", "nextPrice": 354000, "reports": ["성과급 반영해도 실적 전망치 상향"]}, {"date": "2026.06.19", "price": 354000, "nextDate": "2026.06.22", "nextPrice": 353500, "reports": []}, {"date": "2026.06.22", "price": 353500, "nextDate": "2026.06.23", "nextPrice": 310000, "reports": ["중기 주가 상승세 유지 예상"]}, {"date": "2026.06.23", "price": 310000, "nextDate": "2026.06.24", "nextPrice": 340500, "reports": []}, {"date": "2026.06.24", "price": 340500, "nextDate": "2026.06.25", "nextPrice": 358500, "reports": []}, {"date": "2026.06.25", "price": 358500, "nextDate": "2026.06.26", "nextPrice": 339500, "reports": ["27년에 더욱 부각될 생산능력"]}, {"date": "2026.06.26", "price": 339500, "nextDate": "2026.06.29", "nextPrice": 323000, "reports": ["두렵지 않다"]}, {"date": "2026.06.29", "price": 323000, "nextDate": "2026.06.30", "nextPrice": 334000, "reports": ["2Q26 영업이익 89조원"]}, {"date": "2026.06.30", "price": 334000, "nextDate": "2026.07.01", "nextPrice": 314500, "reports": ["충당금 반영 후에도 높아질 눈높이", "난기류 지대에 진입했다고 목적지가 변경되는.."]}, {"date": "2026.07.01", "price": 314500, "nextDate": "2026.07.02", "nextPrice": 286000, "reports": ["2Q26 Preview 그럼에도 불구하고 믿음의 실적"]}, {"date": "2026.07.02", "price": 286000, "nextDate": "2026.07.03", "nextPrice": 309500, "reports": []}, {"date": "2026.07.03", "price": 309500, "nextDate": "2026.07.06", "nextPrice": 318000, "reports": ["실적 전망치 상향 조정 지속"]}, {"date": "2026.07.06", "price": 318000, "nextDate": "2026.07.07", "nextPrice": 296000, "reports": ["조정은 매수의 기회"]}, {"date": "2026.07.07", "price": 296000, "nextDate": "2026.07.08", "nextPrice": 277500, "reports": ["2Q26 Review: 범용 메모리 서프, 파운드리 흑.."]}, {"date": "2026.07.08", "price": 277500, "nextDate": "2026.07.09", "nextPrice": 278000, "reports": ["메모리 이익 체력 확인. 실적 상향 여력 충분", "체급의 위력", "걱정의 벽을 타고", "실적 전망치 상향 조정 지속", "외풍을 극복하고도 남을 실적", "하반기, EPS 성장률 둔화 예상", "과격한 주가 반응에 뇌동하지 말자"]}, {"date": "2026.07.09", "price": 278000, "nextDate": "2026.07.10", "nextPrice": 285000, "reports": []}, {"date": "2026.07.10", "price": 285000, "nextDate": "2026.07.13", "nextPrice": 254500, "reports": []}, {"date": "2026.07.13", "price": 254500, "nextDate": "2026.07.14", "nextPrice": 263000, "reports": []}, {"date": "2026.07.14", "price": 263000, "nextDate": "2026.07.15", "nextPrice": 279500, "reports": []}, {"date": "2026.07.15", "price": 279500, "nextDate": "2026.07.16", "nextPrice": 255000, "reports": []}, {"date": "2026.07.16", "price": 255000, "nextDate": "2026.07.20", "nextPrice": 244000, "reports": []}, {"date": "2026.07.20", "price": 244000, "nextDate": "2026.07.21", "nextPrice": 259000, "reports": []}, {"date": "2026.07.21", "price": 259000, "nextDate": "2026.07.22", "nextPrice": 260500, "reports": []}, {"date": "2026.07.22", "price": 260500, "nextDate": "2026.07.23", "nextPrice": 270000, "reports": []}, {"date": "2026.07.23", "price": 270000, "nextDate": "2026.07.24", "nextPrice": 249500, "reports": []}, {"date": "2026.07.24", "price": 249500, "nextDate": "2026.07.27", "nextPrice": 254000, "reports": []}, {"date": "2026.07.27", "price": 254000, "nextDate": "2026.07.28", "nextPrice": 220000, "reports": []}, {"date": "2026.07.28", "price": 220000, "nextDate": "2026.07.29", "nextPrice": 208500, "reports": []}, {"date": "2026.07.29", "price": 208500, "nextDate": "2026.07.30", "nextPrice": 207000, "reports": ["배당 매력도 급등 구간"]}, {"date": "2026.07.30", "price": 207000, "nextDate": "2026.07.31", "nextPrice": 262500, "reports": []}, {"date": "2026.07.31", "price": 262500, "nextDate": "2026.08.03", "nextPrice": 239500, "reports": ["2Q26 Review 변하지 않은 메모리 호황", "2Q26 Re: 폼은 일시적이지만 클래스는 영원하..", "강력한 LTA와 주주환원으로 합당한 기업가치 ..", "메모리 산업의 구조적 변화에 주목", "동의할 수 없는 주가", "무시할 실적이 아니다", "명확한 주주환원 의지", "품격을 보여줬다", "3Q26 실적 전망치 상향"]}, {"date": "2026.08.03", "price": 239500, "nextDate": "2026.08.04", "nextPrice": 240000, "reports": []}, {"date": "2026.08.04", "price": 240000, "nextDate": "2026.08.05", "nextPrice": 246000, "reports": []}, {"date": "2026.08.05", "price": 246000, "nextDate": "2026.08.06", "nextPrice": 230500, "reports": ["공급과 수요 모두 변화 / HBM 시장 점유율 확.."]}, {"date": "2026.08.06", "price": 230500, "nextDate": "2026.08.07", "nextPrice": 231000, "reports": []}, {"date": "2026.08.07", "price": 231000, "nextDate": "2026.08.10", "nextPrice": 230000, "reports": []}, {"date": "2026.08.10", "price": 230000, "nextDate": "2026.08.11", "nextPrice": 239500, "reports": []}, {"date": "2026.08.11", "price": 239500, "nextDate": "2026.08.12", "nextPrice": 255500, "reports": ["비중확대의 적기"]}, {"date": "2026.08.12", "price": 255500, "nextDate": "2026.08.13", "nextPrice": 268000, "reports": []}, {"date": "2026.08.13", "price": 268000, "nextDate": "2026.08.14", "nextPrice": 274500, "reports": []}, {"date": "2026.08.14", "price": 274500, "nextDate": "2026.08.18", "nextPrice": 268500, "reports": ["사방에서 울리는 낭보들"]}, {"date": "2026.08.18", "price": 268500, "nextDate": "2026.08.19", "nextPrice": 247500, "reports": []}, {"date": "2026.08.19", "price": 247500, "nextDate": "2026.08.20", "nextPrice": 271000, "reports": []}, {"date": "2026.08.20", "price": 271000, "nextDate": "2026.08.21", "nextPrice": 281500, "reports": []}, {"date": "2026.08.21", "price": 281500, "nextDate": "2026.08.24", "nextPrice": 257000, "reports": []}, {"date": "2026.08.24", "price": 257000, "nextDate": "2026.08.25", "nextPrice": 257000, "reports": []}, {"date": "2026.08.25", "price": 257000, "nextDate": "2026.08.26", "nextPrice": 261500, "reports": []}, {"date": "2026.08.26", "price": 261500, "nextDate": "2026.08.27", "nextPrice": 266000, "reports": ["공포가 클수록 중심을 잡자"]}, {"date": "2026.08.27", "price": 266000, "nextDate": "2026.08.28", "nextPrice": 257000, "reports": []}, {"date": "2026.08.28", "price": 257000, "nextDate": "2026.08.31", "nextPrice": 260000, "reports": []}]}, "000660": {"name": "SK하이닉스", "code": "000660", "data": [{"date": "2026.04.06", "price": 886000, "nextDate": "2026.04.07", "nextPrice": 916000, "reports": []}, {"date": "2026.04.07", "price": 916000, "nextDate": "2026.04.08", "nextPrice": 1033000, "reports": []}, {"date": "2026.04.08", "price": 1033000, "nextDate": "2026.04.09", "nextPrice": 998000, "reports": []}, {"date": "2026.04.09", "price": 998000, "nextDate": "2026.04.10", "nextPrice": 1027000, "reports": ["1Q26 Pre: 또프라이즈", "이보다 더 좋을 수 없다"]}, {"date": "2026.04.10", "price": 1027000, "nextDate": "2026.04.13", "nextPrice": 1040000, "reports": []}, {"date": "2026.04.13", "price": 1040000, "nextDate": "2026.04.14", "nextPrice": 1103000, "reports": []}, {"date": "2026.04.14", "price": 1103000, "nextDate": "2026.04.15", "nextPrice": 1136000, "reports": []}, {"date": "2026.04.15", "price": 1136000, "nextDate": "2026.04.16", "nextPrice": 1155000, "reports": ["Memory를 System으로 봐야 그림이 보인다"]}, {"date": "2026.04.16", "price": 1155000, "nextDate": "2026.04.17", "nextPrice": 1128000, "reports": []}, {"date": "2026.04.17", "price": 1128000, "nextDate": "2026.04.20", "nextPrice": 1166000, "reports": []}, {"date": "2026.04.20", "price": 1166000, "nextDate": "2026.04.21", "nextPrice": 1224000, "reports": []}, {"date": "2026.04.21", "price": 1224000, "nextDate": "2026.04.22", "nextPrice": 1223000, "reports": []}, {"date": "2026.04.22", "price": 1223000, "nextDate": "2026.04.23", "nextPrice": 1225000, "reports": []}, {"date": "2026.04.23", "price": 1225000, "nextDate": "2026.04.24", "nextPrice": 1222000, "reports": ["1Q26 Conference call"]}, {"date": "2026.04.24", "price": 1222000, "nextDate": "2026.04.27", "nextPrice": 1292000, "reports": ["가파른 가격 상승세 지속", "여전히 매력적", "1Q26 Re: Cycle goes on", "2Q26 예상 영업이익 65.5조원, 가격 모멘텀 ..", "이제부터는 ‘폭’보다는 ‘지속성’", "Shaper and Longer", "가격 상승 트렌드가 담보된 업황", "2Q26 영업이익 65조원 전망", "2Q26 영업이익 58.9조원으로 개선 전망", "세계 기업 역사에서 최고 영업이익률!", "초고수익 구간 안착"]}, {"date": "2026.04.27", "price": 1292000, "nextDate": "2026.04.28", "nextPrice": 1300000, "reports": []}, {"date": "2026.04.28", "price": 1300000, "nextDate": "2026.04.29", "nextPrice": 1293000, "reports": ["또 하나의 원동력 CPU"]}, {"date": "2026.04.29", "price": 1293000, "nextDate": "2026.04.30", "nextPrice": 1286000, "reports": ["계단식 리레이팅 구간 진입"]}, {"date": "2026.04.30", "price": 1286000, "nextDate": "2026.05.04", "nextPrice": 1447000, "reports": []}, {"date": "2026.05.04", "price": 1447000, "nextDate": "2026.05.06", "nextPrice": 1601000, "reports": ["수요 강세 재확인", "메모리 쟁탈전 지속, 2027년 부각될 HBM 리더.."]}, {"date": "2026.05.06", "price": 1601000, "nextDate": "2026.05.07", "nextPrice": 1654000, "reports": []}, {"date": "2026.05.07", "price": 1654000, "nextDate": "2026.05.08", "nextPrice": 1686000, "reports": ["아직 가보지 못한 제자리를 향해"]}, {"date": "2026.05.08", "price": 1686000, "nextDate": "2026.05.11", "nextPrice": 1880000, "reports": []}, {"date": "2026.05.11", "price": 1880000, "nextDate": "2026.05.12", "nextPrice": 1835000, "reports": ["AI 데이터센터 수주 급증 수혜", "2Q26 영업이익 70조원 예상"]}, {"date": "2026.05.12", "price": 1835000, "nextDate": "2026.05.13", "nextPrice": 1976000, "reports": []}, {"date": "2026.05.13", "price": 1976000, "nextDate": "2026.05.14", "nextPrice": 1970000, "reports": []}, {"date": "2026.05.14", "price": 1970000, "nextDate": "2026.05.15", "nextPrice": 1819000, "reports": []}, {"date": "2026.05.15", "price": 1819000, "nextDate": "2026.05.18", "nextPrice": 1840000, "reports": []}, {"date": "2026.05.18", "price": 1840000, "nextDate": "2026.05.19", "nextPrice": 1745000, "reports": ["NAND 모멘텀 추가 반영"]}, {"date": "2026.05.19", "price": 1745000, "nextDate": "2026.05.20", "nextPrice": 1745000, "reports": []}, {"date": "2026.05.20", "price": 1745000, "nextDate": "2026.05.21", "nextPrice": 1940000, "reports": []}, {"date": "2026.05.21", "price": 1940000, "nextDate": "2026.05.22", "nextPrice": 1941000, "reports": ["주도주는 원래 비싼 겁니다"]}, {"date": "2026.05.22", "price": 1941000, "nextDate": "2026.05.26", "nextPrice": 2052000, "reports": []}, {"date": "2026.05.26", "price": 2052000, "nextDate": "2026.05.27", "nextPrice": 2243000, "reports": []}, {"date": "2026.05.27", "price": 2243000, "nextDate": "2026.05.28", "nextPrice": 2289000, "reports": ["밸류에이션 대기권 돌파", "우려하는 Chasm이 오지 않을 수도 있다"]}, {"date": "2026.05.28", "price": 2289000, "nextDate": "2026.05.29", "nextPrice": 2333000, "reports": []}, {"date": "2026.05.29", "price": 2333000, "nextDate": "2026.06.01", "nextPrice": 2363000, "reports": []}, {"date": "2026.06.01", "price": 2363000, "nextDate": "2026.06.02", "nextPrice": 2360000, "reports": ["플러스 알파: ADR을 넘어 PHLX까지"]}, {"date": "2026.06.02", "price": 2360000, "nextDate": "2026.06.04", "nextPrice": 2298000, "reports": []}, {"date": "2026.06.04", "price": 2298000, "nextDate": "2026.06.05", "nextPrice": 2070000, "reports": []}, {"date": "2026.06.05", "price": 2070000, "nextDate": "2026.06.08", "nextPrice": 1911000, "reports": []}, {"date": "2026.06.08", "price": 1911000, "nextDate": "2026.06.09", "nextPrice": 2215000, "reports": []}, {"date": "2026.06.09", "price": 2215000, "nextDate": "2026.06.10", "nextPrice": 2048000, "reports": ["(깐부)치킨게임 시작"]}, {"date": "2026.06.10", "price": 2048000, "nextDate": "2026.06.11", "nextPrice": 2101000, "reports": []}, {"date": "2026.06.11", "price": 2101000, "nextDate": "2026.06.12", "nextPrice": 2150000, "reports": []}, {"date": "2026.06.12", "price": 2150000, "nextDate": "2026.06.15", "nextPrice": 2288000, "reports": []}, {"date": "2026.06.15", "price": 2288000, "nextDate": "2026.06.16", "nextPrice": 2382000, "reports": []}, {"date": "2026.06.16", "price": 2382000, "nextDate": "2026.06.17", "nextPrice": 2521000, "reports": []}, {"date": "2026.06.17", "price": 2521000, "nextDate": "2026.06.18", "nextPrice": 2685000, "reports": []}, {"date": "2026.06.18", "price": 2685000, "nextDate": "2026.06.19", "nextPrice": 2764000, "reports": []}, {"date": "2026.06.19", "price": 2764000, "nextDate": "2026.06.22", "nextPrice": 2919000, "reports": []}, {"date": "2026.06.22", "price": 2919000, "nextDate": "2026.06.23", "nextPrice": 2555000, "reports": ["P/E 10배는 테크 주식의 기본 배수다", "2Q26 영업이익 63.7 조원 전망"]}, {"date": "2026.06.23", "price": 2555000, "nextDate": "2026.06.24", "nextPrice": 2580000, "reports": []}, {"date": "2026.06.24", "price": 2580000, "nextDate": "2026.06.25", "nextPrice": 2917000, "reports": []}, {"date": "2026.06.25", "price": 2917000, "nextDate": "2026.06.26", "nextPrice": 2673000, "reports": ["출격 SKHY US", "ADR(American Depositary Receipts) 발행을 .."]}, {"date": "2026.06.26", "price": 2673000, "nextDate": "2026.06.29", "nextPrice": 2628000, "reports": ["실적과 멀티플 둘 다 열려 있다"]}, {"date": "2026.06.29", "price": 2628000, "nextDate": "2026.06.30", "nextPrice": 2650000, "reports": []}, {"date": "2026.06.30", "price": 2650000, "nextDate": "2026.07.01", "nextPrice": 2560000, "reports": ["경쟁사 본진으로 침투하는 주도주"]}, {"date": "2026.07.01", "price": 2560000, "nextDate": "2026.07.02", "nextPrice": 2187000, "reports": ["2Q26 Preview 컨센서스 부합"]}, {"date": "2026.07.02", "price": 2187000, "nextDate": "2026.07.03", "nextPrice": 2425000, "reports": ["Agent AI Ecosystem 중심에 서다"]}, {"date": "2026.07.03", "price": 2425000, "nextDate": "2026.07.06", "nextPrice": 2343000, "reports": []}, {"date": "2026.07.06", "price": 2343000, "nextDate": "2026.07.07", "nextPrice": 2201000, "reports": []}, {"date": "2026.07.07", "price": 2201000, "nextDate": "2026.07.08", "nextPrice": 2076000, "reports": ["슈퍼 모멘텀"]}, {"date": "2026.07.08", "price": 2076000, "nextDate": "2026.07.09", "nextPrice": 2186000, "reports": []}, {"date": "2026.07.09", "price": 2186000, "nextDate": "2026.07.10", "nextPrice": 2180000, "reports": []}, {"date": "2026.07.10", "price": 2180000, "nextDate": "2026.07.13", "nextPrice": 1845000, "reports": []}, {"date": "2026.07.13", "price": 1845000, "nextDate": "2026.07.14", "nextPrice": 1913000, "reports": []}, {"date": "2026.07.14", "price": 1913000, "nextDate": "2026.07.15", "nextPrice": 2082000, "reports": ["시선을 약간만 아래로"]}, {"date": "2026.07.15", "price": 2082000, "nextDate": "2026.07.16", "nextPrice": 1842000, "reports": []}, {"date": "2026.07.16", "price": 1842000, "nextDate": "2026.07.20", "nextPrice": 1764000, "reports": []}, {"date": "2026.07.20", "price": 1764000, "nextDate": "2026.07.21", "nextPrice": 1836000, "reports": []}, {"date": "2026.07.21", "price": 1836000, "nextDate": "2026.07.22", "nextPrice": 1830000, "reports": []}, {"date": "2026.07.22", "price": 1830000, "nextDate": "2026.07.23", "nextPrice": 1919000, "reports": []}, {"date": "2026.07.23", "price": 1919000, "nextDate": "2026.07.24", "nextPrice": 1759000, "reports": []}, {"date": "2026.07.24", "price": 1759000, "nextDate": "2026.07.27", "nextPrice": 1816000, "reports": []}, {"date": "2026.07.27", "price": 1816000, "nextDate": "2026.07.28", "nextPrice": 1550000, "reports": []}, {"date": "2026.07.28", "price": 1550000, "nextDate": "2026.07.29", "nextPrice": 1401000, "reports": []}, {"date": "2026.07.29", "price": 1401000, "nextDate": "2026.07.30", "nextPrice": 1322000, "reports": ["2Q26 Conference call", "펀더멘털에 비해 과격한 조정"]}, {"date": "2026.07.30", "price": 1322000, "nextDate": "2026.07.31", "nextPrice": 1718000, "reports": ["2Q26 Re: 귀에 걸면 귀걸이 코에 걸면 코걸이", "2Q26 Review HBM4와 LTA로 이어질 실적 모멘..", "LTA가 불러올 나비효과", "새로운 펀더멘털에도 주가는 과락", "부연 설명", "숨 고르기 후 반등 기대", "실적과 어긋난 주가, 한번은 거칠 과정", "HBM 실적 성장성 감안, 매력적 구간", "변하지 않은 것"]}, {"date": "2026.07.31", "price": 1718000, "nextDate": "2026.08.03", "nextPrice": 1567000, "reports": ["시간의 문제"]}, {"date": "2026.08.03", "price": 1567000, "nextDate": "2026.08.04", "nextPrice": 1577000, "reports": ["2Q26 NDR 후기: 오해와 본질"]}, {"date": "2026.08.04", "price": 1577000, "nextDate": "2026.08.05", "nextPrice": 1668000, "reports": []}, {"date": "2026.08.05", "price": 1668000, "nextDate": "2026.08.06", "nextPrice": 1495000, "reports": ["변화된 공급구조에 주목 / Blended는 Premium.."]}, {"date": "2026.08.06", "price": 1495000, "nextDate": "2026.08.07", "nextPrice": 1422000, "reports": []}, {"date": "2026.08.07", "price": 1422000, "nextDate": "2026.08.10", "nextPrice": 1420000, "reports": []}, {"date": "2026.08.10", "price": 1420000, "nextDate": "2026.08.11", "nextPrice": 1425000, "reports": []}, {"date": "2026.08.11", "price": 1425000, "nextDate": "2026.08.12", "nextPrice": 1504000, "reports": ["역사적 업적의 연속"]}, {"date": "2026.08.12", "price": 1504000, "nextDate": "2026.08.13", "nextPrice": 1593000, "reports": []}, {"date": "2026.08.13", "price": 1593000, "nextDate": "2026.08.14", "nextPrice": 1645000, "reports": []}, {"date": "2026.08.14", "price": 1645000, "nextDate": "2026.08.18", "nextPrice": 1662000, "reports": ["단번에 풀려가는 매듭들"]}, {"date": "2026.08.18", "price": 1662000, "nextDate": "2026.08.19", "nextPrice": 1500000, "reports": []}, {"date": "2026.08.19", "price": 1500000, "nextDate": "2026.08.20", "nextPrice": 1691000, "reports": []}, {"date": "2026.08.20", "price": 1691000, "nextDate": "2026.08.21", "nextPrice": 1730000, "reports": ["40조원은 시작, 대규모 자사주 매입 및 소각 ..", "40조원 규모의 자기주식 취득 및 소각 공시"]}, {"date": "2026.08.21", "price": 1730000, "nextDate": "2026.08.24", "nextPrice": 1671000, "reports": []}, {"date": "2026.08.24", "price": 1671000, "nextDate": "2026.08.25", "nextPrice": 1678000, "reports": []}, {"date": "2026.08.25", "price": 1678000, "nextDate": "2026.08.26", "nextPrice": 1688000, "reports": []}, {"date": "2026.08.26", "price": 1688000, "nextDate": "2026.08.27", "nextPrice": 1730000, "reports": ["짙은 안개속 선명한 성장"]}, {"date": "2026.08.27", "price": 1730000, "nextDate": "2026.08.28", "nextPrice": 1653000, "reports": []}, {"date": "2026.08.28", "price": 1653000, "nextDate": "2026.08.31", "nextPrice": 1674000, "reports": []}]}, "005380": {"name": "현대차", "code": "005380", "data": [{"date": "2026.04.06", "price": 469000, "nextDate": "2026.04.07", "nextPrice": 473000, "reports": []}, {"date": "2026.04.07", "price": 473000, "nextDate": "2026.04.08", "nextPrice": 508000, "reports": ["수익성 기저 구간, 하반기 신차 출시와 로봇/..", "1Q는 숨고르기. Physical AI로 달릴 하반기 .."]}, {"date": "2026.04.08", "price": 508000, "nextDate": "2026.04.09", "nextPrice": 489500, "reports": []}, {"date": "2026.04.09", "price": 489500, "nextDate": "2026.04.10", "nextPrice": 489500, "reports": []}, {"date": "2026.04.10", "price": 489500, "nextDate": "2026.04.13", "nextPrice": 478500, "reports": []}, {"date": "2026.04.13", "price": 478500, "nextDate": "2026.04.14", "nextPrice": 491500, "reports": ["1Q26 Preview: Rough Start"]}, {"date": "2026.04.14", "price": 491500, "nextDate": "2026.04.15", "nextPrice": 508000, "reports": ["불확실성이 확대될수록 대장주를 찾기 마련"]}, {"date": "2026.04.15", "price": 508000, "nextDate": "2026.04.16", "nextPrice": 534000, "reports": ["지나가는 바람일 뿐"]}, {"date": "2026.04.16", "price": 534000, "nextDate": "2026.04.17", "nextPrice": 538000, "reports": []}, {"date": "2026.04.17", "price": 538000, "nextDate": "2026.04.20", "nextPrice": 527000, "reports": []}, {"date": "2026.04.20", "price": 527000, "nextDate": "2026.04.21", "nextPrice": 546000, "reports": []}, {"date": "2026.04.21", "price": 546000, "nextDate": "2026.04.22", "nextPrice": 541000, "reports": []}, {"date": "2026.04.22", "price": 541000, "nextDate": "2026.04.23", "nextPrice": 532000, "reports": []}, {"date": "2026.04.23", "price": 532000, "nextDate": "2026.04.24", "nextPrice": 513000, "reports": []}, {"date": "2026.04.24", "price": 513000, "nextDate": "2026.04.27", "nextPrice": 524000, "reports": ["1Q26 Review: 너무나 잘 견딘 후, 기대될 하..", "하반기로 향하는 시선", "제조업을 넘어 모빌리티/AI 프리미엄 구간으..", "1Q26 리뷰: 무난한 실적을 넘어 신사업으로", "미래를 연결할 단기 모멘텀은 신차효과", "딱 예상한대로", "무난한 실적, 미래 사업 성과는 시간이 필요", "1Q26 Review: 관세&판매보증충당금 영향", "미국 주도의 HEV 판매 비중 최고치 경신"]}, {"date": "2026.04.27", "price": 524000, "nextDate": "2026.04.28", "nextPrice": 555000, "reports": ["하반기부터 다시 많아질 이야기거리"]}, {"date": "2026.04.28", "price": 555000, "nextDate": "2026.04.29", "nextPrice": 556000, "reports": []}, {"date": "2026.04.29", "price": 556000, "nextDate": "2026.04.30", "nextPrice": 531000, "reports": []}, {"date": "2026.04.30", "price": 531000, "nextDate": "2026.05.04", "nextPrice": 539000, "reports": []}, {"date": "2026.05.04", "price": 539000, "nextDate": "2026.05.06", "nextPrice": 550000, "reports": []}, {"date": "2026.05.06", "price": 550000, "nextDate": "2026.05.07", "nextPrice": 572000, "reports": []}, {"date": "2026.05.07", "price": 572000, "nextDate": "2026.05.08", "nextPrice": 613000, "reports": []}, {"date": "2026.05.08", "price": 613000, "nextDate": "2026.05.11", "nextPrice": 646000, "reports": []}, {"date": "2026.05.11", "price": 646000, "nextDate": "2026.05.12", "nextPrice": 646000, "reports": []}, {"date": "2026.05.12", "price": 646000, "nextDate": "2026.05.13", "nextPrice": 710000, "reports": []}, {"date": "2026.05.13", "price": 710000, "nextDate": "2026.05.14", "nextPrice": 712000, "reports": []}, {"date": "2026.05.14", "price": 712000, "nextDate": "2026.05.15", "nextPrice": 700000, "reports": []}, {"date": "2026.05.15", "price": 700000, "nextDate": "2026.05.18", "nextPrice": 663000, "reports": []}, {"date": "2026.05.18", "price": 663000, "nextDate": "2026.05.19", "nextPrice": 604000, "reports": []}, {"date": "2026.05.19", "price": 604000, "nextDate": "2026.05.20", "nextPrice": 592000, "reports": []}, {"date": "2026.05.20", "price": 592000, "nextDate": "2026.05.21", "nextPrice": 666000, "reports": []}, {"date": "2026.05.21", "price": 666000, "nextDate": "2026.05.22", "nextPrice": 655000, "reports": []}, {"date": "2026.05.22", "price": 655000, "nextDate": "2026.05.26", "nextPrice": 689000, "reports": []}, {"date": "2026.05.26", "price": 689000, "nextDate": "2026.05.27", "nextPrice": 681000, "reports": []}, {"date": "2026.05.27", "price": 681000, "nextDate": "2026.05.28", "nextPrice": 677000, "reports": []}, {"date": "2026.05.28", "price": 677000, "nextDate": "2026.05.29", "nextPrice": 723000, "reports": ["현대차의 PER은 왜 달라져야 하는가"]}, {"date": "2026.05.29", "price": 723000, "nextDate": "2026.06.01", "nextPrice": 750000, "reports": []}, {"date": "2026.06.01", "price": 750000, "nextDate": "2026.06.02", "nextPrice": 729000, "reports": []}, {"date": "2026.06.02", "price": 729000, "nextDate": "2026.06.04", "nextPrice": 700000, "reports": []}, {"date": "2026.06.04", "price": 700000, "nextDate": "2026.06.05", "nextPrice": 700000, "reports": []}, {"date": "2026.06.05", "price": 700000, "nextDate": "2026.06.08", "nextPrice": 639000, "reports": []}, {"date": "2026.06.08", "price": 639000, "nextDate": "2026.06.09", "nextPrice": 639000, "reports": []}, {"date": "2026.06.09", "price": 639000, "nextDate": "2026.06.10", "nextPrice": 602000, "reports": []}, {"date": "2026.06.10", "price": 602000, "nextDate": "2026.06.11", "nextPrice": 597000, "reports": []}, {"date": "2026.06.11", "price": 597000, "nextDate": "2026.06.12", "nextPrice": 607000, "reports": []}, {"date": "2026.06.12", "price": 607000, "nextDate": "2026.06.15", "nextPrice": 647000, "reports": []}, {"date": "2026.06.15", "price": 647000, "nextDate": "2026.06.16", "nextPrice": 640000, "reports": []}, {"date": "2026.06.16", "price": 640000, "nextDate": "2026.06.17", "nextPrice": 618000, "reports": ["속성이 다른 이익에 기반한 밸류에이션 할증"]}, {"date": "2026.06.17", "price": 618000, "nextDate": "2026.06.18", "nextPrice": 601000, "reports": []}, {"date": "2026.06.18", "price": 601000, "nextDate": "2026.06.19", "nextPrice": 613000, "reports": ["기대감에서 실적으로"]}, {"date": "2026.06.19", "price": 613000, "nextDate": "2026.06.22", "nextPrice": 581000, "reports": []}, {"date": "2026.06.22", "price": 581000, "nextDate": "2026.06.23", "nextPrice": 511000, "reports": []}, {"date": "2026.06.23", "price": 511000, "nextDate": "2026.06.24", "nextPrice": 509000, "reports": []}, {"date": "2026.06.24", "price": 509000, "nextDate": "2026.06.25", "nextPrice": 503000, "reports": []}, {"date": "2026.06.25", "price": 503000, "nextDate": "2026.06.26", "nextPrice": 480500, "reports": []}, {"date": "2026.06.26", "price": 480500, "nextDate": "2026.06.29", "nextPrice": 497000, "reports": []}, {"date": "2026.06.29", "price": 497000, "nextDate": "2026.06.30", "nextPrice": 495000, "reports": []}, {"date": "2026.06.30", "price": 495000, "nextDate": "2026.07.01", "nextPrice": 487500, "reports": []}, {"date": "2026.07.01", "price": 487500, "nextDate": "2026.07.02", "nextPrice": 482000, "reports": []}, {"date": "2026.07.02", "price": 482000, "nextDate": "2026.07.03", "nextPrice": 492000, "reports": []}, {"date": "2026.07.03", "price": 492000, "nextDate": "2026.07.06", "nextPrice": 502000, "reports": []}, {"date": "2026.07.06", "price": 502000, "nextDate": "2026.07.07", "nextPrice": 479500, "reports": ["둔화에서 회복, 기대에서 현실화"]}, {"date": "2026.07.07", "price": 479500, "nextDate": "2026.07.08", "nextPrice": 462500, "reports": []}, {"date": "2026.07.08", "price": 462500, "nextDate": "2026.07.09", "nextPrice": 445500, "reports": ["내러티브보다는 펀더멘털 회복 가능성에 주목"]}, {"date": "2026.07.09", "price": 445500, "nextDate": "2026.07.10", "nextPrice": 457500, "reports": []}, {"date": "2026.07.10", "price": 457500, "nextDate": "2026.07.13", "nextPrice": 444000, "reports": ["하늘을 짊어진 Atlas, 이제 주가를 들어 올릴..", "2Q26 Preview: 실적 저점 구간의 매수 기회"]}, {"date": "2026.07.13", "price": 444000, "nextDate": "2026.07.14", "nextPrice": 424500, "reports": []}, {"date": "2026.07.14", "price": 424500, "nextDate": "2026.07.15", "nextPrice": 434000, "reports": []}, {"date": "2026.07.15", "price": 434000, "nextDate": "2026.07.16", "nextPrice": 425000, "reports": []}, {"date": "2026.07.16", "price": 425000, "nextDate": "2026.07.20", "nextPrice": 399000, "reports": []}, {"date": "2026.07.20", "price": 399000, "nextDate": "2026.07.21", "nextPrice": 399000, "reports": []}, {"date": "2026.07.21", "price": 399000, "nextDate": "2026.07.22", "nextPrice": 418000, "reports": ["2Q26 프리뷰: 우려를 넘어 로봇 모멘텀 주목"]}, {"date": "2026.07.22", "price": 418000, "nextDate": "2026.07.23", "nextPrice": 432000, "reports": []}, {"date": "2026.07.23", "price": 432000, "nextDate": "2026.07.24", "nextPrice": 401000, "reports": []}, {"date": "2026.07.24", "price": 401000, "nextDate": "2026.07.27", "nextPrice": 403000, "reports": ["실적은 저점, 시선은 로봇", "상반기 부정적 영향은 해소되는 중", "2Q26 Review: 바닥을 찍고, 하반기 레벨업", "2Q26 Re: 하반기 OPM 회복 발판 마련", "2Q26 리뷰: 우려 대비 양호, 로봇 모멘텀 주..", "부담은 덜어냈다", "본업 실적 회복 위에 올라설 로봇·SDV의 가..", "예상된 실적 부진, 그럼에도 밝은 이유", "2Q26 Review: 연간 가이던스 유지, 미래 전략..", "상반기의 부진을 딛고 수익성 가이던스 유지"]}, {"date": "2026.07.27", "price": 403000, "nextDate": "2026.07.28", "nextPrice": 364000, "reports": []}, {"date": "2026.07.28", "price": 364000, "nextDate": "2026.07.29", "nextPrice": 353500, "reports": []}, {"date": "2026.07.29", "price": 353500, "nextDate": "2026.07.30", "nextPrice": 351000, "reports": []}, {"date": "2026.07.30", "price": 351000, "nextDate": "2026.07.31", "nextPrice": 388000, "reports": ["NDR 후기: 실적 저점 확인과 로보틱스"]}, {"date": "2026.07.31", "price": 388000, "nextDate": "2026.08.03", "nextPrice": 393000, "reports": []}, {"date": "2026.08.03", "price": 393000, "nextDate": "2026.08.04", "nextPrice": 392500, "reports": []}, {"date": "2026.08.04", "price": 392500, "nextDate": "2026.08.05", "nextPrice": 404500, "reports": []}, {"date": "2026.08.05", "price": 404500, "nextDate": "2026.08.06", "nextPrice": 400000, "reports": []}, {"date": "2026.08.06", "price": 400000, "nextDate": "2026.08.07", "nextPrice": 395500, "reports": []}, {"date": "2026.08.07", "price": 395500, "nextDate": "2026.08.10", "nextPrice": 408000, "reports": []}, {"date": "2026.08.10", "price": 408000, "nextDate": "2026.08.11", "nextPrice": 403000, "reports": []}, {"date": "2026.08.11", "price": 403000, "nextDate": "2026.08.12", "nextPrice": 409500, "reports": []}, {"date": "2026.08.12", "price": 409500, "nextDate": "2026.08.13", "nextPrice": 418500, "reports": []}, {"date": "2026.08.13", "price": 418500, "nextDate": "2026.08.14", "nextPrice": 453000, "reports": []}, {"date": "2026.08.14", "price": 453000, "nextDate": "2026.08.18", "nextPrice": 435000, "reports": []}, {"date": "2026.08.18", "price": 435000, "nextDate": "2026.08.19", "nextPrice": 414000, "reports": []}, {"date": "2026.08.19", "price": 414000, "nextDate": "2026.08.20", "nextPrice": 417500, "reports": []}, {"date": "2026.08.20", "price": 417500, "nextDate": "2026.08.21", "nextPrice": 415000, "reports": []}, {"date": "2026.08.21", "price": 415000, "nextDate": "2026.08.24", "nextPrice": 414000, "reports": []}, {"date": "2026.08.24", "price": 414000, "nextDate": "2026.08.25", "nextPrice": 421000, "reports": []}, {"date": "2026.08.25", "price": 421000, "nextDate": "2026.08.26", "nextPrice": 408000, "reports": []}, {"date": "2026.08.26", "price": 408000, "nextDate": "2026.08.27", "nextPrice": 398000, "reports": []}, {"date": "2026.08.27", "price": 398000, "nextDate": "2026.08.28", "nextPrice": 399500, "reports": ["2026 CID - 권역별 현지화와 사업 효율화에 ..", "2026년 CEO Investor Day 핵심내용", "26년 CID, 25년 대비 주요 변화 내용", "CID 2026 Review: 자동차라는 본질에 집중", "2026년 CID 리뷰 & QnA 요약", "2026 CEO Investor Day Takeaways"]}, {"date": "2026.08.28", "price": 399500, "nextDate": "2026.08.31", "nextPrice": 403500, "reports": ["CID 2026: It’s a great time to be at Hyun.."]}]}, "035420": {"name": "NAVER", "code": "035420", "data": [{"date": "2026.04.06", "price": 196800, "nextDate": "2026.04.07", "nextPrice": 195900, "reports": []}, {"date": "2026.04.07", "price": 195900, "nextDate": "2026.04.08", "nextPrice": 201500, "reports": []}, {"date": "2026.04.08", "price": 201500, "nextDate": "2026.04.09", "nextPrice": 201500, "reports": []}, {"date": "2026.04.09", "price": 201500, "nextDate": "2026.04.10", "nextPrice": 202000, "reports": ["커머스가 하드캐리"]}, {"date": "2026.04.10", "price": 202000, "nextDate": "2026.04.13", "nextPrice": 199000, "reports": []}, {"date": "2026.04.13", "price": 199000, "nextDate": "2026.04.14", "nextPrice": 201500, "reports": []}, {"date": "2026.04.14", "price": 201500, "nextDate": "2026.04.15", "nextPrice": 211000, "reports": ["AI디레이팅 지속, 커머스와 크립토로 돌파구 ..", "커머스 중심 성장 전략 유지"]}, {"date": "2026.04.15", "price": 211000, "nextDate": "2026.04.16", "nextPrice": 218500, "reports": []}, {"date": "2026.04.16", "price": 218500, "nextDate": "2026.04.17", "nextPrice": 216500, "reports": []}, {"date": "2026.04.17", "price": 216500, "nextDate": "2026.04.20", "nextPrice": 213500, "reports": []}, {"date": "2026.04.20", "price": 213500, "nextDate": "2026.04.21", "nextPrice": 214000, "reports": []}, {"date": "2026.04.21", "price": 214000, "nextDate": "2026.04.22", "nextPrice": 214000, "reports": []}, {"date": "2026.04.22", "price": 214000, "nextDate": "2026.04.23", "nextPrice": 217500, "reports": []}, {"date": "2026.04.23", "price": 217500, "nextDate": "2026.04.24", "nextPrice": 214000, "reports": []}, {"date": "2026.04.24", "price": 214000, "nextDate": "2026.04.27", "nextPrice": 215000, "reports": []}, {"date": "2026.04.27", "price": 215000, "nextDate": "2026.04.28", "nextPrice": 219500, "reports": []}, {"date": "2026.04.28", "price": 219500, "nextDate": "2026.04.29", "nextPrice": 220000, "reports": []}, {"date": "2026.04.29", "price": 220000, "nextDate": "2026.04.30", "nextPrice": 211000, "reports": []}, {"date": "2026.04.30", "price": 211000, "nextDate": "2026.05.04", "nextPrice": 209000, "reports": []}, {"date": "2026.05.04", "price": 209000, "nextDate": "2026.05.06", "nextPrice": 208000, "reports": ["탑라인 성장보다 뼈아픈 마진 악화", "쇼핑 & C2C 성장 가속. 2H26 AI 브리핑 및 AI..", "본업은 기본, 하반기 알파를 기대", "AI 에이전트와 해외 C2C에 대한 도전", "하반기 AI 수익화 성과가 중요"]}, {"date": "2026.05.06", "price": 208000, "nextDate": "2026.05.07", "nextPrice": 207500, "reports": []}, {"date": "2026.05.07", "price": 207500, "nextDate": "2026.05.08", "nextPrice": 215000, "reports": []}, {"date": "2026.05.08", "price": 215000, "nextDate": "2026.05.11", "nextPrice": 211500, "reports": []}, {"date": "2026.05.11", "price": 211500, "nextDate": "2026.05.12", "nextPrice": 204000, "reports": []}, {"date": "2026.05.12", "price": 204000, "nextDate": "2026.05.13", "nextPrice": 201500, "reports": []}, {"date": "2026.05.13", "price": 201500, "nextDate": "2026.05.14", "nextPrice": 213000, "reports": []}, {"date": "2026.05.14", "price": 213000, "nextDate": "2026.05.15", "nextPrice": 203500, "reports": []}, {"date": "2026.05.15", "price": 203500, "nextDate": "2026.05.18", "nextPrice": 200000, "reports": []}, {"date": "2026.05.18", "price": 200000, "nextDate": "2026.05.19", "nextPrice": 198100, "reports": []}, {"date": "2026.05.19", "price": 198100, "nextDate": "2026.05.20", "nextPrice": 191500, "reports": []}, {"date": "2026.05.20", "price": 191500, "nextDate": "2026.05.21", "nextPrice": 199500, "reports": []}, {"date": "2026.05.21", "price": 199500, "nextDate": "2026.05.22", "nextPrice": 203000, "reports": []}, {"date": "2026.05.22", "price": 203000, "nextDate": "2026.05.26", "nextPrice": 200000, "reports": ["트래픽 감소 우려"]}, {"date": "2026.05.26", "price": 200000, "nextDate": "2026.05.27", "nextPrice": 198800, "reports": []}, {"date": "2026.05.27", "price": 198800, "nextDate": "2026.05.28", "nextPrice": 205000, "reports": []}, {"date": "2026.05.28", "price": 205000, "nextDate": "2026.05.29", "nextPrice": 234000, "reports": []}, {"date": "2026.05.29", "price": 234000, "nextDate": "2026.06.01", "nextPrice": 271500, "reports": ["전략적 판단 필요"]}, {"date": "2026.06.01", "price": 271500, "nextDate": "2026.06.02", "nextPrice": 280500, "reports": []}, {"date": "2026.06.02", "price": 280500, "nextDate": "2026.06.04", "nextPrice": 267500, "reports": []}, {"date": "2026.06.04", "price": 267500, "nextDate": "2026.06.05", "nextPrice": 255500, "reports": []}, {"date": "2026.06.05", "price": 255500, "nextDate": "2026.06.08", "nextPrice": 279000, "reports": []}, {"date": "2026.06.08", "price": 279000, "nextDate": "2026.06.09", "nextPrice": 257000, "reports": ["드디어 시작된 AI팩토리의 외부 사업화"]}, {"date": "2026.06.09", "price": 257000, "nextDate": "2026.06.10", "nextPrice": 227000, "reports": ["AI 팩토리, 보수적으로 추정해도 현재가치 19..", "AI 팩토리 사업 진출을 통한 신성장 전략 공..", "성장성을 되찾은 성장주, 위를 보자", "밸류에이션 종합 판단", "NAVER AI 팩토리 사업 진출 분석 및 향후 전.."]}, {"date": "2026.06.10", "price": 227000, "nextDate": "2026.06.11", "nextPrice": 224000, "reports": []}, {"date": "2026.06.11", "price": 224000, "nextDate": "2026.06.12", "nextPrice": 247000, "reports": []}, {"date": "2026.06.12", "price": 247000, "nextDate": "2026.06.15", "nextPrice": 248000, "reports": []}, {"date": "2026.06.15", "price": 248000, "nextDate": "2026.06.16", "nextPrice": 242000, "reports": []}, {"date": "2026.06.16", "price": 242000, "nextDate": "2026.06.17", "nextPrice": 243500, "reports": []}, {"date": "2026.06.17", "price": 243500, "nextDate": "2026.06.18", "nextPrice": 235000, "reports": ["네이버 기관투자자 NDR 후기"]}, {"date": "2026.06.18", "price": 235000, "nextDate": "2026.06.19", "nextPrice": 229500, "reports": []}, {"date": "2026.06.19", "price": 229500, "nextDate": "2026.06.22", "nextPrice": 222000, "reports": []}, {"date": "2026.06.22", "price": 222000, "nextDate": "2026.06.23", "nextPrice": 202500, "reports": []}, {"date": "2026.06.23", "price": 202500, "nextDate": "2026.06.24", "nextPrice": 199400, "reports": []}, {"date": "2026.06.24", "price": 199400, "nextDate": "2026.06.25", "nextPrice": 199700, "reports": []}, {"date": "2026.06.25", "price": 199700, "nextDate": "2026.06.26", "nextPrice": 196400, "reports": []}, {"date": "2026.06.26", "price": 196400, "nextDate": "2026.06.29", "nextPrice": 204000, "reports": []}, {"date": "2026.06.29", "price": 204000, "nextDate": "2026.06.30", "nextPrice": 199000, "reports": []}, {"date": "2026.06.30", "price": 199000, "nextDate": "2026.07.01", "nextPrice": 197400, "reports": []}, {"date": "2026.07.01", "price": 197400, "nextDate": "2026.07.02", "nextPrice": 199900, "reports": ["3분기까지 마진 압박 불가피", "평이한 실적, 결국 트리거는 신사업"]}, {"date": "2026.07.02", "price": 199900, "nextDate": "2026.07.03", "nextPrice": 195800, "reports": []}, {"date": "2026.07.03", "price": 195800, "nextDate": "2026.07.06", "nextPrice": 196600, "reports": []}, {"date": "2026.07.06", "price": 196600, "nextDate": "2026.07.07", "nextPrice": 197200, "reports": []}, {"date": "2026.07.07", "price": 197200, "nextDate": "2026.07.08", "nextPrice": 192700, "reports": []}, {"date": "2026.07.08", "price": 192700, "nextDate": "2026.07.09", "nextPrice": 184400, "reports": []}, {"date": "2026.07.09", "price": 184400, "nextDate": "2026.07.10", "nextPrice": 191300, "reports": []}, {"date": "2026.07.10", "price": 191300, "nextDate": "2026.07.13", "nextPrice": 188000, "reports": ["실적 견조하나, AI 수익화 전까지는 공백"]}, {"date": "2026.07.13", "price": 188000, "nextDate": "2026.07.14", "nextPrice": 183200, "reports": []}, {"date": "2026.07.14", "price": 183200, "nextDate": "2026.07.15", "nextPrice": 189600, "reports": []}, {"date": "2026.07.15", "price": 189600, "nextDate": "2026.07.16", "nextPrice": 190000, "reports": []}, {"date": "2026.07.16", "price": 190000, "nextDate": "2026.07.20", "nextPrice": 185900, "reports": []}, {"date": "2026.07.20", "price": 185900, "nextDate": "2026.07.21", "nextPrice": 193000, "reports": []}, {"date": "2026.07.21", "price": 193000, "nextDate": "2026.07.22", "nextPrice": 196900, "reports": []}, {"date": "2026.07.22", "price": 196900, "nextDate": "2026.07.23", "nextPrice": 220000, "reports": []}, {"date": "2026.07.23", "price": 220000, "nextDate": "2026.07.24", "nextPrice": 207500, "reports": []}, {"date": "2026.07.24", "price": 207500, "nextDate": "2026.07.27", "nextPrice": 225000, "reports": []}, {"date": "2026.07.27", "price": 225000, "nextDate": "2026.07.28", "nextPrice": 210000, "reports": []}, {"date": "2026.07.28", "price": 210000, "nextDate": "2026.07.29", "nextPrice": 201500, "reports": ["3대 주주 엔비디아, 의심을 확신으로 바꿀 시.."]}, {"date": "2026.07.29", "price": 201500, "nextDate": "2026.07.30", "nextPrice": 194700, "reports": []}, {"date": "2026.07.30", "price": 194700, "nextDate": "2026.07.31", "nextPrice": 208000, "reports": []}, {"date": "2026.07.31", "price": 208000, "nextDate": "2026.08.03", "nextPrice": 207500, "reports": []}, {"date": "2026.08.03", "price": 207500, "nextDate": "2026.08.04", "nextPrice": 226500, "reports": []}, {"date": "2026.08.04", "price": 226500, "nextDate": "2026.08.05", "nextPrice": 229000, "reports": []}, {"date": "2026.08.05", "price": 229000, "nextDate": "2026.08.06", "nextPrice": 226000, "reports": []}, {"date": "2026.08.06", "price": 226000, "nextDate": "2026.08.07", "nextPrice": 210000, "reports": ["자산은 파트너가, 운영 매출은 NAVER가"]}, {"date": "2026.08.07", "price": 210000, "nextDate": "2026.08.10", "nextPrice": 211500, "reports": []}, {"date": "2026.08.10", "price": 211500, "nextDate": "2026.08.11", "nextPrice": 214000, "reports": ["파이낸셜 투자 확대에도 중심 성장 스토리 그..", "B2C와 B2B 모두 잡는다", "하반기 마진 압박 불가피하지만, AI DC가 열..", "AI팩토리 신사업을 통한 성장성 제고 기대", "경쟁력을 갖춘 플랫폼 AI의 파도를 항해 중", "하반기 관건은 AI Factory 성과", "단기 수익성보다 미래 먹거리에 투자", "중장기 관점에서 바라볼 때"]}, {"date": "2026.08.11", "price": 214000, "nextDate": "2026.08.12", "nextPrice": 215500, "reports": []}, {"date": "2026.08.12", "price": 215500, "nextDate": "2026.08.13", "nextPrice": 226500, "reports": []}, {"date": "2026.08.13", "price": 226500, "nextDate": "2026.08.14", "nextPrice": 228000, "reports": []}, {"date": "2026.08.14", "price": 228000, "nextDate": "2026.08.18", "nextPrice": 217000, "reports": ["프런티어 업체와 제휴 필요"]}, {"date": "2026.08.18", "price": 217000, "nextDate": "2026.08.19", "nextPrice": 208000, "reports": []}, {"date": "2026.08.19", "price": 208000, "nextDate": "2026.08.20", "nextPrice": 219500, "reports": []}, {"date": "2026.08.20", "price": 219500, "nextDate": "2026.08.21", "nextPrice": 222000, "reports": ["NDR, 코어위브, 네비우스, 브룩필드에서 얻은.."]}, {"date": "2026.08.21", "price": 222000, "nextDate": "2026.08.24", "nextPrice": 223500, "reports": []}, {"date": "2026.08.24", "price": 223500, "nextDate": "2026.08.25", "nextPrice": 220500, "reports": []}, {"date": "2026.08.25", "price": 220500, "nextDate": "2026.08.26", "nextPrice": 220000, "reports": []}, {"date": "2026.08.26", "price": 220000, "nextDate": "2026.08.27", "nextPrice": 216500, "reports": []}, {"date": "2026.08.27", "price": 216500, "nextDate": "2026.08.28", "nextPrice": 220500, "reports": []}, {"date": "2026.08.28", "price": 220500, "nextDate": "2026.08.31", "nextPrice": 217000, "reports": []}]}, "051910": {"name": "LG화학", "code": "051910", "data": [{"date": "2026.04.06", "price": 317000, "nextDate": "2026.04.07", "nextPrice": 323500, "reports": []}, {"date": "2026.04.07", "price": 323500, "nextDate": "2026.04.08", "nextPrice": 344500, "reports": []}, {"date": "2026.04.08", "price": 344500, "nextDate": "2026.04.09", "nextPrice": 355000, "reports": []}, {"date": "2026.04.09", "price": 355000, "nextDate": "2026.04.10", "nextPrice": 356000, "reports": []}, {"date": "2026.04.10", "price": 356000, "nextDate": "2026.04.13", "nextPrice": 340000, "reports": []}, {"date": "2026.04.13", "price": 340000, "nextDate": "2026.04.14", "nextPrice": 341500, "reports": []}, {"date": "2026.04.14", "price": 341500, "nextDate": "2026.04.15", "nextPrice": 354000, "reports": []}, {"date": "2026.04.15", "price": 354000, "nextDate": "2026.04.16", "nextPrice": 357500, "reports": []}, {"date": "2026.04.16", "price": 357500, "nextDate": "2026.04.17", "nextPrice": 360000, "reports": []}, {"date": "2026.04.17", "price": 360000, "nextDate": "2026.04.20", "nextPrice": 365500, "reports": []}, {"date": "2026.04.20", "price": 365500, "nextDate": "2026.04.21", "nextPrice": 389500, "reports": []}, {"date": "2026.04.21", "price": 389500, "nextDate": "2026.04.22", "nextPrice": 392000, "reports": []}, {"date": "2026.04.22", "price": 392000, "nextDate": "2026.04.23", "nextPrice": 391500, "reports": ["석유화학 단기 흑자전환, 양극재 부진 지속"]}, {"date": "2026.04.23", "price": 391500, "nextDate": "2026.04.24", "nextPrice": 391500, "reports": []}, {"date": "2026.04.24", "price": 391500, "nextDate": "2026.04.27", "nextPrice": 379500, "reports": []}, {"date": "2026.04.27", "price": 379500, "nextDate": "2026.04.28", "nextPrice": 394000, "reports": []}, {"date": "2026.04.28", "price": 394000, "nextDate": "2026.04.29", "nextPrice": 407500, "reports": []}, {"date": "2026.04.29", "price": 407500, "nextDate": "2026.04.30", "nextPrice": 397000, "reports": []}, {"date": "2026.04.30", "price": 397000, "nextDate": "2026.05.04", "nextPrice": 429000, "reports": []}, {"date": "2026.05.04", "price": 429000, "nextDate": "2026.05.06", "nextPrice": 423500, "reports": ["배터리의 가파른 회복, 하반기 석유화학이 관..", "하반기 추정치, LGES/석유화학 하향 vs. 첨단..", "2분기까지 개선되는 수익성"]}, {"date": "2026.05.06", "price": 423500, "nextDate": "2026.05.07", "nextPrice": 425000, "reports": ["첨단소재 실적 턴어라운드 시작"]}, {"date": "2026.05.07", "price": 425000, "nextDate": "2026.05.08", "nextPrice": 429500, "reports": []}, {"date": "2026.05.08", "price": 429500, "nextDate": "2026.05.11", "nextPrice": 423500, "reports": []}, {"date": "2026.05.11", "price": 423500, "nextDate": "2026.05.12", "nextPrice": 388500, "reports": []}, {"date": "2026.05.12", "price": 388500, "nextDate": "2026.05.13", "nextPrice": 387500, "reports": []}, {"date": "2026.05.13", "price": 387500, "nextDate": "2026.05.14", "nextPrice": 392500, "reports": []}, {"date": "2026.05.14", "price": 392500, "nextDate": "2026.05.15", "nextPrice": 374000, "reports": []}, {"date": "2026.05.15", "price": 374000, "nextDate": "2026.05.18", "nextPrice": 373000, "reports": []}, {"date": "2026.05.18", "price": 373000, "nextDate": "2026.05.19", "nextPrice": 350500, "reports": []}, {"date": "2026.05.19", "price": 350500, "nextDate": "2026.05.20", "nextPrice": 332000, "reports": []}, {"date": "2026.05.20", "price": 332000, "nextDate": "2026.05.21", "nextPrice": 348000, "reports": []}, {"date": "2026.05.21", "price": 348000, "nextDate": "2026.05.22", "nextPrice": 351000, "reports": []}, {"date": "2026.05.22", "price": 351000, "nextDate": "2026.05.26", "nextPrice": 351000, "reports": []}, {"date": "2026.05.26", "price": 351000, "nextDate": "2026.05.27", "nextPrice": 331000, "reports": []}, {"date": "2026.05.27", "price": 331000, "nextDate": "2026.05.28", "nextPrice": 344500, "reports": []}, {"date": "2026.05.28", "price": 344500, "nextDate": "2026.05.29", "nextPrice": 367000, "reports": []}, {"date": "2026.05.29", "price": 367000, "nextDate": "2026.06.01", "nextPrice": 363500, "reports": []}, {"date": "2026.06.01", "price": 363500, "nextDate": "2026.06.02", "nextPrice": 355000, "reports": []}, {"date": "2026.06.02", "price": 355000, "nextDate": "2026.06.04", "nextPrice": 352000, "reports": []}, {"date": "2026.06.04", "price": 352000, "nextDate": "2026.06.05", "nextPrice": 349000, "reports": []}, {"date": "2026.06.05", "price": 349000, "nextDate": "2026.06.08", "nextPrice": 321000, "reports": []}, {"date": "2026.06.08", "price": 321000, "nextDate": "2026.06.09", "nextPrice": 329000, "reports": []}, {"date": "2026.06.09", "price": 329000, "nextDate": "2026.06.10", "nextPrice": 323000, "reports": []}, {"date": "2026.06.10", "price": 323000, "nextDate": "2026.06.11", "nextPrice": 316500, "reports": []}, {"date": "2026.06.11", "price": 316500, "nextDate": "2026.06.12", "nextPrice": 345000, "reports": []}, {"date": "2026.06.12", "price": 345000, "nextDate": "2026.06.15", "nextPrice": 360500, "reports": []}, {"date": "2026.06.15", "price": 360500, "nextDate": "2026.06.16", "nextPrice": 367500, "reports": []}, {"date": "2026.06.16", "price": 367500, "nextDate": "2026.06.17", "nextPrice": 361000, "reports": []}, {"date": "2026.06.17", "price": 361000, "nextDate": "2026.06.18", "nextPrice": 342500, "reports": []}, {"date": "2026.06.18", "price": 342500, "nextDate": "2026.06.19", "nextPrice": 338000, "reports": []}, {"date": "2026.06.19", "price": 338000, "nextDate": "2026.06.22", "nextPrice": 323000, "reports": []}, {"date": "2026.06.22", "price": 323000, "nextDate": "2026.06.23", "nextPrice": 291500, "reports": []}, {"date": "2026.06.23", "price": 291500, "nextDate": "2026.06.24", "nextPrice": 297500, "reports": []}, {"date": "2026.06.24", "price": 297500, "nextDate": "2026.06.25", "nextPrice": 285500, "reports": []}, {"date": "2026.06.25", "price": 285500, "nextDate": "2026.06.26", "nextPrice": 271000, "reports": []}, {"date": "2026.06.26", "price": 271000, "nextDate": "2026.06.29", "nextPrice": 308000, "reports": []}, {"date": "2026.06.29", "price": 308000, "nextDate": "2026.06.30", "nextPrice": 280000, "reports": []}, {"date": "2026.06.30", "price": 280000, "nextDate": "2026.07.01", "nextPrice": 280000, "reports": []}, {"date": "2026.07.01", "price": 280000, "nextDate": "2026.07.02", "nextPrice": 281500, "reports": []}, {"date": "2026.07.02", "price": 281500, "nextDate": "2026.07.03", "nextPrice": 281500, "reports": []}, {"date": "2026.07.03", "price": 281500, "nextDate": "2026.07.06", "nextPrice": 276500, "reports": []}, {"date": "2026.07.06", "price": 276500, "nextDate": "2026.07.07", "nextPrice": 265500, "reports": []}, {"date": "2026.07.07", "price": 265500, "nextDate": "2026.07.08", "nextPrice": 255000, "reports": []}, {"date": "2026.07.08", "price": 255000, "nextDate": "2026.07.09", "nextPrice": 251500, "reports": []}, {"date": "2026.07.09", "price": 251500, "nextDate": "2026.07.10", "nextPrice": 264000, "reports": []}, {"date": "2026.07.10", "price": 264000, "nextDate": "2026.07.13", "nextPrice": 260500, "reports": []}, {"date": "2026.07.13", "price": 260500, "nextDate": "2026.07.14", "nextPrice": 255000, "reports": []}, {"date": "2026.07.14", "price": 255000, "nextDate": "2026.07.15", "nextPrice": 264500, "reports": []}, {"date": "2026.07.15", "price": 264500, "nextDate": "2026.07.16", "nextPrice": 260500, "reports": []}, {"date": "2026.07.16", "price": 260500, "nextDate": "2026.07.20", "nextPrice": 253000, "reports": []}, {"date": "2026.07.20", "price": 253000, "nextDate": "2026.07.21", "nextPrice": 250500, "reports": []}, {"date": "2026.07.21", "price": 250500, "nextDate": "2026.07.22", "nextPrice": 252000, "reports": []}, {"date": "2026.07.22", "price": 252000, "nextDate": "2026.07.23", "nextPrice": 271500, "reports": []}, {"date": "2026.07.23", "price": 271500, "nextDate": "2026.07.24", "nextPrice": 259000, "reports": ["더디지만 그래도 조금씩 회복되는 첨단소재"]}, {"date": "2026.07.24", "price": 259000, "nextDate": "2026.07.27", "nextPrice": 260000, "reports": []}, {"date": "2026.07.27", "price": 260000, "nextDate": "2026.07.28", "nextPrice": 240500, "reports": []}, {"date": "2026.07.28", "price": 240500, "nextDate": "2026.07.29", "nextPrice": 232500, "reports": []}, {"date": "2026.07.29", "price": 232500, "nextDate": "2026.07.30", "nextPrice": 245500, "reports": []}, {"date": "2026.07.30", "price": 245500, "nextDate": "2026.07.31", "nextPrice": 258000, "reports": []}, {"date": "2026.07.31", "price": 258000, "nextDate": "2026.08.03", "nextPrice": 247000, "reports": []}, {"date": "2026.08.03", "price": 247000, "nextDate": "2026.08.04", "nextPrice": 256500, "reports": ["전지 소재의 실적 방향성은 우상향", "일회성 요인으로 컨센서스 상회", "상반기는 화학, 하반기는 첨단소재", "첨단소재 상저하고 방향성 재확인", "첨단소재, 반등 시작"]}, {"date": "2026.08.04", "price": 256500, "nextDate": "2026.08.05", "nextPrice": 255500, "reports": []}, {"date": "2026.08.05", "price": 255500, "nextDate": "2026.08.06", "nextPrice": 261000, "reports": []}, {"date": "2026.08.06", "price": 261000, "nextDate": "2026.08.07", "nextPrice": 276000, "reports": []}, {"date": "2026.08.07", "price": 276000, "nextDate": "2026.08.10", "nextPrice": 278000, "reports": []}, {"date": "2026.08.10", "price": 278000, "nextDate": "2026.08.11", "nextPrice": 274000, "reports": []}, {"date": "2026.08.11", "price": 274000, "nextDate": "2026.08.12", "nextPrice": 275500, "reports": []}, {"date": "2026.08.12", "price": 275500, "nextDate": "2026.08.13", "nextPrice": 275500, "reports": []}, {"date": "2026.08.13", "price": 275500, "nextDate": "2026.08.14", "nextPrice": 280500, "reports": []}, {"date": "2026.08.14", "price": 280500, "nextDate": "2026.08.18", "nextPrice": 270500, "reports": []}, {"date": "2026.08.18", "price": 270500, "nextDate": "2026.08.19", "nextPrice": 266000, "reports": []}, {"date": "2026.08.19", "price": 266000, "nextDate": "2026.08.20", "nextPrice": 264000, "reports": []}, {"date": "2026.08.20", "price": 264000, "nextDate": "2026.08.21", "nextPrice": 252500, "reports": []}, {"date": "2026.08.21", "price": 252500, "nextDate": "2026.08.24", "nextPrice": 273000, "reports": []}, {"date": "2026.08.24", "price": 273000, "nextDate": "2026.08.25", "nextPrice": 263000, "reports": []}, {"date": "2026.08.25", "price": 263000, "nextDate": "2026.08.26", "nextPrice": 263500, "reports": []}, {"date": "2026.08.26", "price": 263500, "nextDate": "2026.08.27", "nextPrice": 274500, "reports": []}, {"date": "2026.08.27", "price": 274500, "nextDate": "2026.08.28", "nextPrice": 277000, "reports": []}, {"date": "2026.08.28", "price": 277000, "nextDate": "2026.08.31", "nextPrice": 280000, "reports": []}]}};
+
+
+/* =========================
+   게임 변수
+========================= */
+
+let selectedCode = null;
+
+let gameData = [];
+
+let index = 0;
+
+let streak = 0;
+
+let best = 0;
+
+let correct = false;
+
+
+/* =========================
+   화면 변경
+========================= */
+
+function showScreen(id) {
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(
+            screen => {
+
+                screen
+                    .classList
+                    .remove("active");
+
+            }
+        );
+
+
+    document
+        .getElementById(id)
+        .classList
+        .add("active");
+
+}
+
+
+/* =========================
+   메뉴
+========================= */
+
+function openRules() {
+
+    showScreen("rulesScreen");
+
+}
+
+
+function openStockSelect() {
+
+    renderStockList();
+
+    showScreen("stockScreen");
+
+}
+
+
+function goStockSelect() {
+
+    selectedCode = null;
+
+    gameData = [];
+
+    index = 0;
+
+    streak = 0;
+
+    renderStockList();
+
+    showScreen("stockScreen");
+
+}
+
+
+/* =========================
+   종목 카드 생성
+========================= */
+
+function renderStockList() {
+
+    const stockList =
+        document.getElementById("stockList");
+
+
+    stockList.innerHTML =
+        "";
+
+
+    Object.entries(stockData)
+        .forEach(
+            ([code, stock]) => {
+
+                const option =
+                    document.createElement("div");
+
+
+                option.className =
+                    "stock-option pixel-panel";
+
+
+                if (selectedCode === code) {
+
+                    option
+                        .classList
+                        .add("selected");
+
+                }
+
+
+                option.innerHTML = `
+
+                    <div class="stock-icon">
+                        🏢
+                    </div>
+
+                    <div>
+
+                        <div class="stock-name">
+                            ${stock.name}
+                        </div>
+
+                        <div class="stock-code">
+                            ${code} · KOSPI
+                        </div>
+
+                    </div>
+
+                    <div class="check-box">
+                        ✓
+                    </div>
+
+                `;
+
+
+                option.onclick =
+                    function() {
+
+                        selectStock(code);
+
+                    };
+
+
+                stockList.appendChild(option);
+
+            }
+        );
+
+}
+
+
+/* =========================
+   종목 선택
+========================= */
+
+function selectStock(code) {
+
+    selectedCode = code;
+
+    renderStockList();
+
+}
+
+
+/* =========================
+   게임 시작
+========================= */
+
+function startGame() {
+
+    if (!selectedCode) {
+
+        document
+            .getElementById("selectAlertOverlay")
+            .classList
+            .add("active");
+
+        return;
+
+    }
+
+
+    gameData =
+        stockData[selectedCode].data;
+
+
+    index = 0;
+
+    streak = 0;
+
+
+    showScreen("gameScreen");
+
+
+    loadQuestion();
+
+}
+
+
+/* =========================
+   미선택 팝업 닫기
+========================= */
+
+function closeSelectAlert() {
+
+    document
+        .getElementById("selectAlertOverlay")
+        .classList
+        .remove("active");
+
+}
+
+
+/* =========================
+   문제 출력
+========================= */
+
+function loadQuestion() {
+
+    const data =
+        gameData[index];
+
+
+    const currentStock =
+        stockData[selectedCode];
+
+
+    document
+        .getElementById("gameCompany")
+        .innerText =
+            currentStock.name;
+
+
+    document
+        .getElementById("gameDate")
+        .innerText =
+            data.date;
+
+
+    document
+        .getElementById("currentPrice")
+        .innerText =
+            data.price.toLocaleString()
+            +
+            "원";
+
+
+    document
+        .getElementById("streak")
+        .innerText =
+            streak;
+
+
+    document
+        .getElementById("gameBest")
+        .innerText =
+            best;
+
+
+    const answerButtons =
+        document.querySelectorAll(".answer-btn");
+
+
+    if (
+        data.reports
+        &&
+        data.reports.length > 0
+    ) {
+
+        answerButtons
+            .forEach(
+                button => {
+
+                    button.disabled = true;
+
+                }
+            );
+
+
+        setTimeout(
+            () => {
+
+                showReport(data.reports);
+
+            },
+            400
+        );
+
+    }
+
+    else {
+
+        answerButtons
+            .forEach(
+                button => {
+
+                    button.disabled = false;
+
+                }
+            );
+
+    }
+
+}
+
+
+/* =========================
+   리포트 팝업
+========================= */
+
+function showReport(reports) {
+
+    const reportList =
+        document.getElementById("reportList");
+
+
+    reportList.innerHTML =
+        "";
+
+
+    const randomReports =
+        [...reports]
+            .sort(
+                () =>
+                    Math.random()
+                    -
+                    0.5
+            )
+            .slice(
+                0,
+                2
+            );
+
+
+    randomReports
+        .forEach(
+            report => {
+
+                const item =
+                    document.createElement("div");
+
+
+                item.className =
+                    "report-item";
+
+
+                item.innerText =
+                    '"'
+                    +
+                    report
+                    +
+                    '"';
+
+
+                reportList.appendChild(item);
+
+            }
+        );
+
+
+    document
+        .getElementById("reportOverlay")
+        .classList
+        .add("active");
+
+}
+
+
+/* =========================
+   리포트 확인
+========================= */
+
+function closeReport() {
+
+    document
+        .getElementById("reportOverlay")
+        .classList
+        .remove("active");
+
+
+    document
+        .querySelectorAll(".answer-btn")
+        .forEach(
+            button => {
+
+                button.disabled = false;
+
+            }
+        );
+
+}
+
+
+/* =========================
+   정답 판정
+========================= */
+
+function answer(choice) {
+
+    const data =
+        gameData[index];
+
+
+    let direction;
+
+
+    if (
+        data.nextPrice
+        >
+        data.price
+    ) {
+
+        direction = "up";
+
+    }
+
+    else if (
+        data.nextPrice
+        <
+        data.price
+    ) {
+
+        direction = "down";
+
+    }
+
+    else {
+
+        direction = "same";
+
+    }
+
+
+    correct =
+        direction === "same"
+        ||
+        choice === direction;
+
+
+    if (correct) {
+
+        streak++;
+
+
+        if (
+            streak > best
+        ) {
+
+            best = streak;
+
+        }
+
+    }
+
+
+    showResult(
+        data,
+        direction
+    );
+
+}
+
+
+/* =========================
+   결과 팝업
+========================= */
+
+function showResult(
+    data,
+    direction
+) {
+
+    const rate =
+        (
+            (
+                data.nextPrice
+                -
+                data.price
+            )
+            /
+            data.price
+            *
+            100
+        );
+
+
+    const icon =
+        document.getElementById("resultIcon");
+
+
+    const title =
+        document.getElementById("resultTitle");
+
+
+    const rateElement =
+        document.getElementById("resultRate");
+
+
+    if (correct) {
+
+        icon.innerText =
+            "✨";
+
+
+        title.innerText =
+            "정답입니다!";
+
+
+        title.className =
+            "popup-title correct-title";
+
+    }
+
+    else {
+
+        icon.innerText =
+            "😢";
+
+
+        title.innerText =
+            "틀렸습니다!";
+
+
+        title.className =
+            "popup-title wrong-title";
+
+    }
+
+
+    document
+        .getElementById("resultPrice")
+        .innerText =
+            data.nextPrice.toLocaleString()
+            +
+            "원";
+
+
+    if (
+        direction === "up"
+    ) {
+
+        rateElement.innerText =
+            "▲ +"
+            +
+            rate.toFixed(2)
+            +
+            "%";
+
+
+        rateElement.className =
+            "result-rate rate-up";
+
+    }
+
+    else if (
+        direction === "down"
+    ) {
+
+        rateElement.innerText =
+            "▼ "
+            +
+            rate.toFixed(2)
+            +
+            "%";
+
+
+        rateElement.className =
+            "result-rate rate-down";
+
+    }
+
+    else {
+
+        rateElement.innerText =
+            "― 0.00%";
+
+
+        rateElement.className =
+            "result-rate rate-same";
+
+    }
+
+
+    document
+        .getElementById("resultButton")
+        .innerText =
+            correct
+            ?
+            "다음 거래일 ▶"
+            :
+            "결과 확인 ▶";
+
+
+    document
+        .getElementById("resultOverlay")
+        .classList
+        .add("active");
+
+}
+
+
+/* =========================
+   결과 이후
+========================= */
+
+function afterResult() {
+
+    document
+        .getElementById("resultOverlay")
+        .classList
+        .remove("active");
+
+
+    if (!correct) {
+
+        gameOver();
+
+        return;
+
+    }
+
+
+    index++;
+
+
+    if (
+        index >=
+        gameData.length
+    ) {
+
+        gameClear();
+
+        return;
+
+    }
+
+
+    loadQuestion();
+
+}
+
+
+/* =========================
+   GAME OVER
+========================= */
+
+function gameOver() {
+
+    document
+        .getElementById("finalScore")
+        .innerText =
+            streak
+            +
+            "일";
+
+
+    document
+        .getElementById("finalBest")
+        .innerText =
+            best;
+
+
+    document
+        .getElementById("startBest")
+        .innerText =
+            best;
+
+
+    showScreen("gameOverScreen");
+
+}
+
+
+/* =========================
+   GAME OVER 이미지 저장
+========================= */
+
+function saveGameOverImage() {
+
+    const gameOverScreen =
+        document.getElementById("gameOverScreen");
+
+
+    const saveButton =
+        document.querySelector(".save-gameover-btn");
+
+
+    const gameoverButtons =
+        document.querySelector(".gameover-btns");
+
+
+    saveButton.style.visibility =
+        "hidden";
+
+
+    gameoverButtons.style.visibility =
+        "hidden";
+
+
+    html2canvas(
+        gameOverScreen,
+        {
+            scale: 2,
+            backgroundColor: "#eaf7ff"
+        }
+    )
+    .then(
+        canvas => {
+
+            saveButton.style.visibility =
+                "visible";
+
+
+            gameoverButtons.style.visibility =
+                "visible";
+
+
+            const link =
+                document.createElement("a");
+
+
+            link.download =
+                "stock-game-result.png";
+
+
+            link.href =
+                canvas.toDataURL("image/png");
+
+
+            link.click();
+
+        }
+    )
+    .catch(
+        error => {
+
+            saveButton.style.visibility =
+                "visible";
+
+
+            gameoverButtons.style.visibility =
+                "visible";
+
+
+            console.error(
+                "이미지 저장 실패:",
+                error
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   GAME CLEAR
+========================= */
+
+function gameClear() {
+
+    document
+        .getElementById("clearScore")
+        .innerText =
+            streak
+            +
+            "일";
+
+
+    document
+        .getElementById("startBest")
+        .innerText =
+            best;
+
+
+    showScreen("clearScreen");
+
+}
+
+
+/* =========================
+   같은 종목 다시 도전
+========================= */
+
+function restartSameStock() {
+
+    gameData =
+        stockData[selectedCode].data;
+
+
+    index = 0;
+
+    streak = 0;
+
+
+    document
+        .querySelectorAll(".answer-btn")
+        .forEach(
+            button => {
+
+                button.disabled = false;
+
+            }
+        );
+
+
+    showScreen("gameScreen");
+
+
+    loadQuestion();
+
+}
+
+
+/* =========================
+   초기 BEST
+========================= */
+
+document
+    .getElementById("startBest")
+    .innerText =
+        best;
+
+
+</script>
+
+
+</body>
+
+</html>
