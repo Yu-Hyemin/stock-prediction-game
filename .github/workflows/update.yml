@@ -2,12 +2,9 @@ name: Update stock game data
 
 on:
   schedule:
-    # GitHub Actions의 cron은 UTC 기준입니다.
-    # 현재 설정: 평일 KST 18:00 = UTC 09:00
-    # KST 원하는 시각에서 9시간을 빼고 아래 첫 두 숫자(분, 시)를 바꾸세요.
-    # 예: 매일 KST 20:30 -> '30 11 * * *'
+    # 매일 KST 01:00 = 전날 UTC 16:00
     - cron: '0 16 * * *'
-  workflow_dispatch: # Actions 화면에서 언제든 수동 실행 가능
+  workflow_dispatch:
 
 permissions:
   contents: write
