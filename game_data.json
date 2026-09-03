@@ -4,13 +4,6 @@
     "code": "005930",
     "data": [
       {
-        "date": "2026.04.08",
-        "price": 210500,
-        "nextDate": "2026.04.09",
-        "nextPrice": 204000,
-        "reports": []
-      },
-      {
         "date": "2026.04.09",
         "price": 204000,
         "nextDate": "2026.04.10",
@@ -778,6 +771,13 @@
         "nextDate": "2026.09.02",
         "nextPrice": 250500,
         "reports": []
+      },
+      {
+        "date": "2026.09.02",
+        "price": 250500,
+        "nextDate": "2026.09.03",
+        "nextPrice": 250000,
+        "reports": []
       }
     ]
   },
@@ -786,21 +786,11 @@
     "code": "000660",
     "data": [
       {
-        "date": "2026.04.08",
-        "price": 1033000,
-        "nextDate": "2026.04.09",
-        "nextPrice": 998000,
-        "reports": []
-      },
-      {
         "date": "2026.04.09",
         "price": 998000,
         "nextDate": "2026.04.10",
         "nextPrice": 1027000,
-        "reports": [
-          "1Q26 Pre: 또프라이즈",
-          "이보다 더 좋을 수 없다"
-        ]
+        "reports": []
       },
       {
         "date": "2026.04.10",
@@ -1565,6 +1555,13 @@
         "nextDate": "2026.09.02",
         "nextPrice": 1613000,
         "reports": []
+      },
+      {
+        "date": "2026.09.02",
+        "price": 1613000,
+        "nextDate": "2026.09.03",
+        "nextPrice": 1596000,
+        "reports": []
       }
     ]
   },
@@ -1572,13 +1569,6 @@
     "name": "현대차",
     "code": "005380",
     "data": [
-      {
-        "date": "2026.04.08",
-        "price": 508000,
-        "nextDate": "2026.04.09",
-        "nextPrice": 489500,
-        "reports": []
-      },
       {
         "date": "2026.04.09",
         "price": 489500,
@@ -2319,6 +2309,13 @@
         "nextDate": "2026.09.02",
         "nextPrice": 378000,
         "reports": []
+      },
+      {
+        "date": "2026.09.02",
+        "price": 378000,
+        "nextDate": "2026.09.03",
+        "nextPrice": 383500,
+        "reports": []
       }
     ]
   },
@@ -2327,20 +2324,11 @@
     "code": "035420",
     "data": [
       {
-        "date": "2026.04.08",
-        "price": 201500,
-        "nextDate": "2026.04.09",
-        "nextPrice": 201500,
-        "reports": []
-      },
-      {
         "date": "2026.04.09",
         "price": 201500,
         "nextDate": "2026.04.10",
         "nextPrice": 202000,
-        "reports": [
-          "커머스가 하드캐리"
-        ]
+        "reports": []
       },
       {
         "date": "2026.04.10",
@@ -3065,6 +3053,13 @@
         "nextDate": "2026.09.02",
         "nextPrice": 209000,
         "reports": []
+      },
+      {
+        "date": "2026.09.02",
+        "price": 209000,
+        "nextDate": "2026.09.03",
+        "nextPrice": 207500,
+        "reports": []
       }
     ]
   },
@@ -3072,13 +3067,6 @@
     "name": "LG화학",
     "code": "051910",
     "data": [
-      {
-        "date": "2026.04.08",
-        "price": 344500,
-        "nextDate": "2026.04.09",
-        "nextPrice": 355000,
-        "reports": []
-      },
       {
         "date": "2026.04.09",
         "price": 355000,
@@ -3779,6 +3767,13 @@
         "price": 282000,
         "nextDate": "2026.09.02",
         "nextPrice": 269000,
+        "reports": []
+      },
+      {
+        "date": "2026.09.02",
+        "price": 269000,
+        "nextDate": "2026.09.03",
+        "nextPrice": 287000,
         "reports": []
       }
     ]
