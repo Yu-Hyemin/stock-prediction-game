@@ -4,13 +4,6 @@
     "code": "005930",
     "data": [
       {
-        "date": "2026.04.14",
-        "price": 206500,
-        "nextDate": "2026.04.15",
-        "nextPrice": 211000,
-        "reports": []
-      },
-      {
         "date": "2026.04.15",
         "price": 211000,
         "nextDate": "2026.04.16",
@@ -780,6 +773,13 @@
         "reports": [
           "HBM으로 매크로 우려 극복"
         ]
+      },
+      {
+        "date": "2026.09.08",
+        "price": 269500,
+        "nextDate": "2026.09.09",
+        "nextPrice": 269500,
+        "reports": []
       }
     ]
   },
@@ -788,20 +788,11 @@
     "code": "000660",
     "data": [
       {
-        "date": "2026.04.14",
-        "price": 1103000,
-        "nextDate": "2026.04.15",
-        "nextPrice": 1136000,
-        "reports": []
-      },
-      {
         "date": "2026.04.15",
         "price": 1136000,
         "nextDate": "2026.04.16",
         "nextPrice": 1155000,
-        "reports": [
-          "Memory를 System으로 봐야 그림이 보인다"
-        ]
+        "reports": []
       },
       {
         "date": "2026.04.16",
@@ -1566,6 +1557,13 @@
         "reports": [
           "HBM 고객 다변화 본격화"
         ]
+      },
+      {
+        "date": "2026.09.08",
+        "price": 1793000,
+        "nextDate": "2026.09.09",
+        "nextPrice": 1856000,
+        "reports": []
       }
     ]
   },
@@ -1574,20 +1572,11 @@
     "code": "005380",
     "data": [
       {
-        "date": "2026.04.14",
-        "price": 491500,
-        "nextDate": "2026.04.15",
-        "nextPrice": 508000,
-        "reports": []
-      },
-      {
         "date": "2026.04.15",
         "price": 508000,
         "nextDate": "2026.04.16",
         "nextPrice": 534000,
-        "reports": [
-          "지나가는 바람일 뿐"
-        ]
+        "reports": []
       },
       {
         "date": "2026.04.16",
@@ -2316,6 +2305,13 @@
         "nextDate": "2026.09.08",
         "nextPrice": 385000,
         "reports": []
+      },
+      {
+        "date": "2026.09.08",
+        "price": 385000,
+        "nextDate": "2026.09.09",
+        "nextPrice": 388000,
+        "reports": []
       }
     ]
   },
@@ -2323,13 +2319,6 @@
     "name": "NAVER",
     "code": "035420",
     "data": [
-      {
-        "date": "2026.04.14",
-        "price": 201500,
-        "nextDate": "2026.04.15",
-        "nextPrice": 211000,
-        "reports": []
-      },
       {
         "date": "2026.04.15",
         "price": 211000,
@@ -3057,6 +3046,15 @@
         "nextDate": "2026.09.08",
         "nextPrice": 214500,
         "reports": []
+      },
+      {
+        "date": "2026.09.08",
+        "price": 214500,
+        "nextDate": "2026.09.09",
+        "nextPrice": 210000,
+        "reports": [
+          "아시아 유일 통합 AI 팩토리 사업자로의 부상"
+        ]
       }
     ]
   },
@@ -3064,13 +3062,6 @@
     "name": "LG화학",
     "code": "051910",
     "data": [
-      {
-        "date": "2026.04.14",
-        "price": 341500,
-        "nextDate": "2026.04.15",
-        "nextPrice": 354000,
-        "reports": []
-      },
       {
         "date": "2026.04.15",
         "price": 354000,
@@ -3771,6 +3762,13 @@
         "price": 279500,
         "nextDate": "2026.09.08",
         "nextPrice": 270000,
+        "reports": []
+      },
+      {
+        "date": "2026.09.08",
+        "price": 270000,
+        "nextDate": "2026.09.09",
+        "nextPrice": 285000,
         "reports": []
       }
     ]
