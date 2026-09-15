@@ -4,13 +4,6 @@
     "code": "005930",
     "data": [
       {
-        "date": "2026.04.20",
-        "price": 214500,
-        "nextDate": "2026.04.21",
-        "nextPrice": 219000,
-        "reports": []
-      },
-      {
         "date": "2026.04.21",
         "price": 219000,
         "nextDate": "2026.04.22",
@@ -695,6 +688,13 @@
         "nextDate": "2026.09.14",
         "nextPrice": 248500,
         "reports": []
+      },
+      {
+        "date": "2026.09.14",
+        "price": 248500,
+        "nextDate": "2026.09.15",
+        "nextPrice": 250500,
+        "reports": []
       }
     ]
   },
@@ -702,13 +702,6 @@
     "name": "SK하이닉스",
     "code": "000660",
     "data": [
-      {
-        "date": "2026.04.20",
-        "price": 1166000,
-        "nextDate": "2026.04.21",
-        "nextPrice": 1224000,
-        "reports": []
-      },
       {
         "date": "2026.04.21",
         "price": 1224000,
@@ -1394,6 +1387,13 @@
         "nextDate": "2026.09.14",
         "nextPrice": 1683000,
         "reports": []
+      },
+      {
+        "date": "2026.09.14",
+        "price": 1683000,
+        "nextDate": "2026.09.15",
+        "nextPrice": 1712000,
+        "reports": []
       }
     ]
   },
@@ -1401,13 +1401,6 @@
     "name": "현대차",
     "code": "005380",
     "data": [
-      {
-        "date": "2026.04.20",
-        "price": 527000,
-        "nextDate": "2026.04.21",
-        "nextPrice": 546000,
-        "reports": []
-      },
       {
         "date": "2026.04.21",
         "price": 546000,
@@ -2093,6 +2086,13 @@
         "nextDate": "2026.09.14",
         "nextPrice": 367500,
         "reports": []
+      },
+      {
+        "date": "2026.09.14",
+        "price": 367500,
+        "nextDate": "2026.09.15",
+        "nextPrice": 369500,
+        "reports": []
       }
     ]
   },
@@ -2100,13 +2100,6 @@
     "name": "NAVER",
     "code": "035420",
     "data": [
-      {
-        "date": "2026.04.20",
-        "price": 213500,
-        "nextDate": "2026.04.21",
-        "nextPrice": 214000,
-        "reports": []
-      },
       {
         "date": "2026.04.21",
         "price": 214000,
@@ -2792,6 +2785,13 @@
         "nextDate": "2026.09.14",
         "nextPrice": 203000,
         "reports": []
+      },
+      {
+        "date": "2026.09.14",
+        "price": 203000,
+        "nextDate": "2026.09.15",
+        "nextPrice": 205500,
+        "reports": []
       }
     ]
   },
@@ -2799,13 +2799,6 @@
     "name": "LG화학",
     "code": "051910",
     "data": [
-      {
-        "date": "2026.04.20",
-        "price": 365500,
-        "nextDate": "2026.04.21",
-        "nextPrice": 389500,
-        "reports": []
-      },
       {
         "date": "2026.04.21",
         "price": 389500,
@@ -3490,6 +3483,13 @@
         "price": 273000,
         "nextDate": "2026.09.14",
         "nextPrice": 267500,
+        "reports": []
+      },
+      {
+        "date": "2026.09.14",
+        "price": 267500,
+        "nextDate": "2026.09.15",
+        "nextPrice": 270500,
         "reports": []
       }
     ]
