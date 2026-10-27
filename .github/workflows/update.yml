@@ -1,9 +1,6 @@
 name: Update stock game data
 
 on:
-  schedule:
-    # 매일 KST 01:00 = 전날 UTC 16:00
-    - cron: '0 16 * * *'
   workflow_dispatch:
 
 permissions:
